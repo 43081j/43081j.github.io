@@ -1,0 +1,3 @@
+[submodule "canvas-paint"]
+	path = canvas-paint
+	url = git://github.com/43081j/canvas-paint.git
