@@ -1,7 +1,0 @@
-[submodule "canvas-paint"]
-	path = canvas-paint
-	url = git://github.com/43081j/canvas-paint.git
-[submodule "canvas-paths"]
-	path = canvas-paths
-	url = git://github.com/43081j/canvas-paths.git
-	branch = master
