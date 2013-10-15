@@ -6,3 +6,7 @@
 	path = canvas-paths
 	url = git://github.com/43081j/canvas-paths.git
 	branch = master
+[submodule "canvas-fractals"]
+	path = canvas-fractals
+	url = git://github.com/43081j/canvas-fractals.git
+	branch = master
