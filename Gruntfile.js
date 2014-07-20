@@ -13,7 +13,18 @@ module.exports = function(grunt) {
 			},
 			build: {
 				files: {
-					'src/app.min.js': 'src/js/*.js'
+					'app.min.js': 'src/js/*.js'
+				}
+			}
+		},
+		sass: {
+			build: {
+				options: {
+					style: 'compressed',
+					banner: '/*! <%= pkg.name %> */\n'
+				},
+				files: {
+					'app.min.css': 'src/scss/app.scss'
 				}
 			}
 		}
@@ -21,7 +32,8 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-sass');
 
     grunt.registerTask('default', ['jshint']);
-    grunt.registerTask('build', ['jshint', 'uglify:build']);
+    grunt.registerTask('build', ['jshint', 'uglify:build', 'sass:build']);
 };
