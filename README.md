@@ -1,4 +1,6 @@
-43081j.github.io
+43081j.com
 ================
 
-Just the ol' website to organise some repos and what not.
+The **43081j.com** website, articles and all.
+
+Find me at [@43081j](http://twitter.com/43081j) and [43081j.com](http://43081j.com/).
