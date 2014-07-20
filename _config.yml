@@ -1,4 +1,3 @@
-pygments: true
 exclude: ['README.md', 'Gruntfile.js', 'src/', 'node_modules', 'package.json']
 permalink: /:year/:month/:title
 paginate: 12

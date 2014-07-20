@@ -1,0 +1,30 @@
+---
+layout: default
+title: 43081j
+---
+
+<div class="posts">
+	<ul>
+		{% for post in paginator.posts %}
+		<li>
+			{% if post.external %}<a href="{{ post.external }}" target="_blank" title="{{ post.title }}">
+			{% else %}<a href="{{ post.url }}">{% endif %}
+				<h2>{{ post.title }}</h2>
+				<span class="meta">{{ post.date || "%B %e, %Y" }}</span>
+			</a>
+		</li>
+		{% endfor %}
+	</ul>
+	<div class="pager">
+		{% if paginator.previous_page %}
+			{% if paginator.previous_page == 1 %}
+			<a href="/" class="pager-left"><i class="fa fa-chevron-left"></i> Previous</a>
+			{% else %}
+			<a href="/page{{ paginator.previous_page }}" class="pager-left"><i class="fa fa-chevron-left"></i> Previous</a>
+			{% endif %}
+		{% endif %}
+		{% if paginator.next_page %}
+			<a href="/page{{ paginator.next_page }}" class="pager-right">Next <i class="fa fa-chevron-right"></i></a>
+		{% endif %}
+	</div>
+</div>
