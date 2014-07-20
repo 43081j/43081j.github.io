@@ -1,0 +1,20 @@
+{
+  "name": "43081j",
+  "version": "0.0.0",
+  "description": "43081j Site",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/43081j/43081j.github.io.git"
+  },
+  "author": "43081j",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/43081j/43081j.github.io/issues"
+  },
+  "homepage": "http://43081j.com/",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-uglify": "^0.5.0"
+  }
+}
