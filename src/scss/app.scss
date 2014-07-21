@@ -1,0 +1,163 @@
+$screen-sm: 768px;
+$screen-md: 992px;
+$screen-lg: 1200px;
+
+* {
+	font-family: 'Open Sans', sans-serif;
+}
+
+body {
+	margin:0;
+}
+
+h1, h2, h3, h4, h5 {
+	font-weight: 300;
+	border-bottom: 1px solid rgba(0,0,0,.1);
+}	
+
+h1 {
+	font-size: 40px;
+}
+
+h2, h3, h4, h5 {
+	font-weight: 600;
+}
+
+h4, h5 {
+	text-transform: uppercase;
+}
+
+p {
+	font-size: 14px;
+}
+
+.post {
+	h1 {
+		border-bottom:none;
+		margin-bottom: 5px;
+	}
+
+	.meta {
+		border-bottom: 1px solid rgba(0,0,0,.1);
+		margin-bottom: 30px;
+		padding-bottom: 10px;
+		font-size: 75%;
+		font-weight: 600;
+	}
+}
+
+.container {
+	z-index: 500;
+	margin: auto;
+	width: auto;
+	padding: 0px 8px;
+
+	@media (min-width: $screen-sm) {
+		width: 750px;
+		padding: 0px;
+	}
+
+	@media (min-width: $screen-md) {
+		width: 970px;
+		padding: 0px;
+	}
+
+	@media (min-width: $screen-lg) {
+		width: 1170px;
+		padding: 0px;
+	}
+}
+
+.header {
+	font-size: 14px;
+	background: rgba(255,255,255,.97);
+	box-shadow: 0 0 1px rgba(0,0,0,.15);
+	color: rgba(0,0,0,.8);
+	line-height: 40px;
+	margin-bottom: 40px;
+
+	@media (min-width: $screen-sm) {
+		line-height: 65px;
+	}
+
+	z-index: 800;
+	width: 100%;
+
+	&:before, &:after {
+		display: table;
+		content: " ";
+	}
+
+	&:after {
+		clear:both;
+	}
+
+	.left {
+		@media (min-width: $screen-sm) {
+			float:left;
+		}
+	}
+
+	.right {
+		@media (min-width: $screen-sm) {
+			float:right;
+		}
+	}
+
+	a {
+		color: rgba(4,4,4,1);
+		text-decoration:none;
+		&:hover {
+			color: #007DB8;
+		}
+	}
+
+	p {
+		margin: 0;
+		margin-left: 18px;
+		display:inline-block;
+
+		@media (min-width: $screen-sm) {
+			margin: 0;
+		}
+	}
+
+	h1 {
+		margin: 0;
+		padding: 0px 18px;
+		font-weight: 600;
+		font-size:18px;
+		display:block;
+		border-bottom: 1px solid rgba(0, 0, 0, .15);
+
+		@media (min-width: $screen-sm) {
+			margin-right: 18px;
+			border-right: 1px solid rgba(0, 0, 0, .15);
+			border-bottom: none;
+			display:inline-block;
+		}
+
+		span {
+			font-weight:400;
+			font-size:14px;
+			color: rgba(0,0,0,.6);
+		}
+	}
+
+	span {
+		color: rgba(0,0,0,.6);
+	}
+
+	.social {
+		display:inline-block;
+		margin-right: 18px;
+		margin-left: 18px;
+
+		@media (min-width: $screen-sm) {
+			margin-left: 0;
+		}
+	}
+}
+
+.content {
+}
