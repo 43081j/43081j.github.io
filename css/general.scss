@@ -1,0 +1,52 @@
+
+* {
+	font-family: 'Open Sans', sans-serif;
+}
+
+body {
+	margin:0;
+}
+
+h1, h2, h3, h4, h5 {
+	font-weight: 300;
+	border-bottom: 1px solid rgba(0,0,0,.1);
+}	
+
+h1 {
+	font-size: 40px;
+}
+
+h2, h3, h4, h5 {
+	font-weight: 600;
+}
+
+h4, h5 {
+	text-transform: uppercase;
+}
+
+p {
+	font-size: 14px;
+}
+
+.container {
+	z-index: 500;
+	margin: auto;
+	width: auto;
+	padding: 0px 8px;
+
+	@media (min-width: $screen-sm) {
+		width: 750px;
+		padding: 0px;
+	}
+
+	@media (min-width: $screen-md) {
+		width: 970px;
+		padding: 0px;
+	}
+
+	@media (min-width: $screen-lg) {
+		width: 1170px;
+		padding: 0px;
+	}
+}
+
