@@ -28,6 +28,14 @@ p {
 	font-size: 14px;
 }
 
+a {
+	color: rgba(4,4,4,1);
+	text-decoration:none;
+	&:hover {
+		color: #007DB8;
+	}
+}
+
 .container {
 	z-index: 500;
 	margin: auto;
