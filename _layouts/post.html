@@ -1,0 +1,15 @@
+{% include header.html %}
+
+<article class="post">
+	<h1>{{ page.title }}</h1>
+	<div class="meta">
+		<p>{{ page.date | date: '%B %d, %Y' }}</p>
+		{% if page.path %}
+		<a href="//github.com/43081j/43081j.github.io/blob/master/_posts/{{ page.path }}">
+			<i class="fa fa-github"></i> Edit Page
+		</a>
+		{% endif %}
+	</div>
+</article>
+
+{% include footer.html %}

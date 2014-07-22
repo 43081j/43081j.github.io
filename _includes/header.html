@@ -3,7 +3,11 @@
 	<head>
 		<meta charset="utf-8">
 		<title>{{ page.title }}</title>
+		{% if page.description %}
 		<meta name="description" content="{{ page.description }}">
+		{% else %}
+		<meta name="description" content="Software engineer building JavaScript, HTML5, NodeJS and AngularJS libraries to push the web forward.">
+		{% endif %}
 		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 		<link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet">
 		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
