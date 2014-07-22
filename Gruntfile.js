@@ -24,7 +24,7 @@ module.exports = function(grunt) {
 					banner: '/*! <%= pkg.name %> */\n'
 				},
 				files: {
-					'app.min.css': 'src/scss/app.scss'
+					'app.css': 'css/app.scss'
 				}
 			}
 		}
