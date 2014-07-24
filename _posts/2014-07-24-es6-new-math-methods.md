@@ -14,39 +14,39 @@ I spend quite a large chunk of time working on mathematical applications so thes
 
 The easiest way to show this is using the binary notation of a 32-bit integer like follows:
 
-~~~ javascript
+{% highlight javascript %}
 var x = 0b1000000;	// 64
 Math.clz32(x);		// 25 (32 minus 7 digits)
-~~~
+{% endhighlight %}
 
 ## hypot
 
 As the name says, `hypot` calculates the hypotenuse (yay pythagoras!), the usual `sqrt(a^2 + b^2)` but with the ability to provide any number of arguments like so:
 
-~~~ javascript
+{% highlight javascript %}
 Math.hypot(a, b, c); // sqrt(a^2 + b^2 + c^2)
-~~~
+{% endhighlight %}
 
 ## trunc
 
 Native truncation functionality. This would be calculated by using `ceil` when the value is less than zero and `floor` greater than or equal to zero. However, now it is as simple as:
 
-~~~ javascript
+{% highlight javascript %}
 Math.trunc(3.1415927); // 3
-~~~
+{% endhighlight %}
 
 ## sign
 
 A very handy function to get the sign of a value, useful in a bunch of places:
 
-~~~ javascript
+{% highlight javascript %}
 Math.sign(10);			// 1
 Math.sign(-10);			// -1
 Math.sign(0);			// 0
 Math.sign(-0);			// -0
 Math.sign(NaN);			// NaN
 Math.sign(Infinity);	// 0
-~~~
+{% endhighlight %}
 
 As you can see:
 

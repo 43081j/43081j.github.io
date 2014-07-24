@@ -1,4 +1,16 @@
 .post {
+	code {
+		font-family: monospace, serif;
+	}
+
+	p {
+		code {
+			background-color: #f0f0f0;
+			border-radius: 3px;
+			padding: 1px 4px;
+		}
+	}
+
 	h1 {
 		border-bottom:none;
 		margin-bottom: 5px;
