@@ -15,11 +15,11 @@ I spend quite a large chunk of time working on mathematical applications so thes
 The easiest way to show this is using the binary notation of a 32-bit integer like follows:
 
 {% highlight javascript %}
-// 64
 0b1000000;
+// 64
 
+Math.clz32(0b1000000);
 // 25 (32 minus 7 digits)
-Math.clz32(x);
 {% endhighlight %}
 
 ## hypot
@@ -27,8 +27,8 @@ Math.clz32(x);
 As the name says, `hypot` calculates the hypotenuse (yay pythagoras!), the usual `sqrt(a^2 + b^2)` but with the ability to provide any number of arguments like so:
 
 {% highlight javascript %}
-// sqrt(a^2 + b^2 + c^2)
 Math.hypot(a, b, c);
+// sqrt(a^2 + b^2 + c^2)
 {% endhighlight %}
 
 ## trunc
@@ -36,8 +36,8 @@ Math.hypot(a, b, c);
 Native truncation functionality. This would be calculated by using `ceil` when the value is less than zero and `floor` greater than or equal to zero. However, now it is as simple as:
 
 {% highlight javascript %}
-// 3
 Math.trunc(3.1415927);
+// 3
 {% endhighlight %}
 
 ## sign
@@ -45,18 +45,23 @@ Math.trunc(3.1415927);
 A very handy function to get the sign of a value, useful in a bunch of places:
 
 {% highlight javascript %}
-// 1
 Math.sign(10);
-// -1
+// 1
+
 Math.sign(-10);
-// 0
+// -1
+
 Math.sign(0);
-// -0
-Math.sign(-0);
-// NaN
-Math.sign(NaN);
 // 0
+
+Math.sign(-0);
+// -0
+
+Math.sign(NaN);
+// NaN
+
 Math.sign(Infinity);
+// 0
 {% endhighlight %}
 
 As you can see:
