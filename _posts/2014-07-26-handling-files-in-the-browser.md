@@ -16,7 +16,7 @@ Here's an example:
 
 {% highlight javascript %}
 document.querySelector('#fileinput').addEventListener('change', function(e) {
-	var files = this.files,
+	var	files = this.files,
 		reader = new FileReader();
 
 	reader.onloadend = function(e) {
