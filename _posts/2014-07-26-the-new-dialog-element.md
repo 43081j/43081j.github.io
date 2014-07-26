@@ -49,9 +49,9 @@ The standard dialog styling isn't anything great, but that's no problem as this 
 
 {% highlight css %}
 dialog {
-	border-radius: 6px;
-	border: 1px solid rgba(0,0,0,.4);
-	box-shadow: 0 0 5px rgba(0,0,0,.4);
+    border-radius: 6px;
+    border: 1px solid rgba(0,0,0,.4);
+    box-shadow: 0 0 5px rgba(0,0,0,.4);
 }
 {% endhighlight %}
 
@@ -59,12 +59,12 @@ You can also style the backdrop when using `showModal`:
 
 {% highlight css %}
 dialog::backdrop {
-	position:fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: rgba(0,0,0,.4);
+    position:fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,.4);
 }
 {% endhighlight %}
 
@@ -78,9 +78,9 @@ If you place a form inside a dialog and give it this method, the dialog will be 
 
 {% highlight html %}
 <dialog>
-	<form method="dialog">
-		<buton type="submit" value="foo">Foo</button>
-	</form>
+    <form method="dialog">
+        <buton type="submit" value="foo">Foo</button>
+    </form>
 </dialog>
 {% endhighlight %}
 
