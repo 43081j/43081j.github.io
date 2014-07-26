@@ -14,7 +14,7 @@ When this API first became available, I created such things as [rar.js](http://g
 
 Here's an example:
 
-{% highlight javascript linenos %}
+{% highlight javascript %}
 document.querySelector('#fileinput').addEventListener('change', function(e) {
 	var files = this.files,
 		reader = new FileReader();
@@ -34,7 +34,7 @@ Of course, some extra code will be needed when handling large files this way to 
 
 Canary has recently been updated with the addition of a `File` constructor, so you can now *create files* inside the browser.
 
-{% highlight javascript linenos %}
+{% highlight javascript %}
 var file = new File(['foo', 'bar'], 'test.txt', { type: 'text/plain' });
 {% endhighlight %}
 
