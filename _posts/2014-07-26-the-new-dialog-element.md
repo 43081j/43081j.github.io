@@ -1,12 +1,12 @@
 ---
-title: The new HTML5 Modal element
-description: Using the new HTML5 modal element to provide cross-browser modals without libraries.
+title: The new HTML5 dialog element
+description: Using the new HTML5 dialog element to provide cross-browser dialogs without libraries.
 layout: post
 ---
 
 The HTML5 `dialog` element provides native dialog box functionality, such that no more libraries are needed to create such dialogs.
 
-This will improve accessibility as the browser will know a dialog is a dialog, currently it does not. It will also allow cross-browser native modal handling rather than relying on a third-party library.
+This will improve accessibility as the browser will know a dialog is a dialog, currently it does not. It will also allow cross-browser native dialog handling rather than relying on a third-party library.
 
 ## Simple Example
 
@@ -68,7 +68,7 @@ dialog::backdrop {
 }
 {% endhighlight %}
 
-After customising the CSS, you can quite easily have a modal setup just like that of Bootstrap without the need for any third-party library.
+After customising the CSS, you can quite easily have a dialog setup just like that of Bootstrap without the need for any third-party library.
 
 ## Use within forms
 
