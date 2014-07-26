@@ -29,10 +29,11 @@ p {
 }
 
 a {
-	color: rgba(4,4,4,1);
 	text-decoration:none;
+	color: #007DB8;
+
 	&:hover {
-		color: #007DB8;
+		font-weight: 600;
 	}
 }
 
