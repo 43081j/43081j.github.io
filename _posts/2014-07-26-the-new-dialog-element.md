@@ -89,3 +89,5 @@ Upon submission of the above form, `dialog.returnValue` will be `foo`.
 ## Give it a try
 
 Chrome (37, beta) currently supports the `dialog` element, so go ahead and have a play around with it.
+
+A demo can be found [here](http://jsfiddle.net/3xr9P/). If the dialog appears open on load, your browser does not yet support it.
