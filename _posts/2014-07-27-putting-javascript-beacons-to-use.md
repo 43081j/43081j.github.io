@@ -12,7 +12,7 @@ Currently, if we want to send some data when a user leaves the page, we must sen
 
 As you can imagine, sending a synchronous request on unloading of the page will result in a slight delay for the user. If they navigate to another website, the other website will appear to load slower than it should, due to the browser needing to send the synchronous request off first.
 
-Beacons solve this problem by the browser keeping a queue of small requests to be sent *eventually*. So we may tell the browser we want to send some data back, it will queue this request and send it when possible without disrupting user experience.
+Beacons solve this problem by the browser keeping a queue of small requests to be sent *eventually*.
 
 ## An example
 
