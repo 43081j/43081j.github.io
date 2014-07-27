@@ -16,6 +16,9 @@ This will improve accessibility as the browser will know a dialog is a dialog, c
 
 This will create a hidden dialog which has yet to be opened.
 
+<dialog id="demo_00">I am a dialog</dialog>
+<button type="button" onclick="document.querySelector('#demo_00').show()">Try it out</button>
+
 ## Dialog API
 
 We have three available methods, `dialog.show()`, `dialog.close()` and `dialog.showModal()`:
@@ -88,4 +91,4 @@ Upon submission of the above form, `dialog.returnValue` will be `foo`.
 
 ## Give it a try
 
-Chrome currently supports the `dialog` element, so go ahead and have a play around with it.
+Chrome (37, beta) currently supports the `dialog` element, so go ahead and have a play around with it.
