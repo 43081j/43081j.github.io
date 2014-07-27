@@ -82,7 +82,7 @@ If you place a form inside a dialog and give it this method, the dialog will be 
 {% highlight html %}
 <dialog>
     <form method="dialog">
-        <buton type="submit" value="foo">Foo</button>
+        <button type="submit" value="foo">Foo</button>
     </form>
 </dialog>
 {% endhighlight %}
