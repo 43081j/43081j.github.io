@@ -44,12 +44,6 @@ There has been misuse of the `$parsers` and `$formatters` properties of `ngModel
 
 Now a custom validation rule as simple as:
 
-{% highlight html %}
-<input type="text" my-validator name="foo">
-{% endhighlight %}
-
-
-
 {% highlight javascript %}
 app.directive('myValidator', function() {
     return {
@@ -64,6 +58,12 @@ app.directive('myValidator', function() {
         }
     };
 });
+{% endhighlight %}
+
+Use as a directive:
+
+{% highlight html %}
+<input type="text" my-validator name="foo">
 {% endhighlight %}
 
 Obviously, this could be implemented with `ngPattern`, but you can see how easy it would be to make more advanced rules.
