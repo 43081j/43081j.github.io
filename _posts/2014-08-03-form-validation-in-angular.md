@@ -13,8 +13,8 @@ In the past, you'd see something like this:
 {% highlight html %}
 <input type="url" name="foo" required>
 <div class="validation" ng-show="form.foo.$error">
-	<span class="help-block" ng-show="form.$error.url">URL is invalid</span>
-	<span class="help-block" ng-show="!form.$error.url && form.$error.required">URL is required</span>
+    <span class="help-block" ng-show="form.$error.url">URL is invalid</span>
+    <span class="help-block" ng-show="!form.$error.url && form.$error.required">URL is required</span>
 </div>
 {% endhighlight %}
 
@@ -25,8 +25,8 @@ As you can see, this will get fairly complex quickly, especially since we would 
 {% highlight html %}
 <input type="url" name="foo" required>
 <div class="validation" ng-messages="form.foo.$error">
-	<span class="help-block" ng-message="url">URL is invalid</span>
-	<span class="help-block" ng-message="required">URL is required</span>
+    <span class="help-block" ng-message="url">URL is invalid</span>
+    <span class="help-block" ng-message="required">URL is required</span>
 </div>
 {% endhighlight %}
 
@@ -50,17 +50,17 @@ Now a custom validation rule as simple as:
 
 {% highlight javascript %}
 app.directive('myValidator', function() {
-	return {
-		restrict: 'A',
-		require: 'ngModel',
-		link: function($scope, elem, attr, ctrl) {
-			ctrl.$validators.myValidator = function(val) {
-				// Return true/false for valid/invalid
-				// Val is the model value, the user input
-				return val.match(/^\d+$/);
-			};
-		}
-	};
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function($scope, elem, attr, ctrl) {
+            ctrl.$validators.myValidator = function(val) {
+                // Return true/false for valid/invalid
+                // Val is the model value, the user input
+                return val.match(/^\d+$/);
+            };
+        }
+    };
 });
 {% endhighlight %}
 
@@ -77,7 +77,7 @@ It has been shown many times that immediate validation is a bother, it increases
 {% highlight html %}
 <input type="url" name="foo" required>
 <div class="validation" ng-show="form.foo.$touched" ng-messages="form.foo.$error">
-	...
+    ...
 </div>
 {% endhighlight %}
 
@@ -91,7 +91,7 @@ However, we can now do the following:
 
 {% highlight html %}
 <div ng-show="form.$submitted">
-	Some submission message
+    Some submission message
 </div>
 {% endhighlight %}
 
