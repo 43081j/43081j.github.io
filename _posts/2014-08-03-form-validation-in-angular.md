@@ -48,6 +48,8 @@ Now a custom validation rule as simple as:
 <input type="text" my-validator name="foo">
 {% endhighlight %}
 
+
+
 {% highlight javascript %}
 app.directive('myValidator', function() {
     return {
