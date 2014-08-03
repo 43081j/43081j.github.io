@@ -13,8 +13,8 @@ In the past, you'd see something like this:
 {% highlight html %}
 <input type="url" name="foo" required>
 <div class="validation" ng-show="form.foo.$error">
-    <span class="help-block" ng-show="form.$error.url">URL is invalid</span>
-    <span class="help-block" ng-show="!form.$error.url && form.$error.required">URL is required</span>
+    <span class="help-block" ng-show="form.foo.$error.url">URL is invalid</span>
+    <span class="help-block" ng-show="!form.foo.$error.url && form.$error.required">URL is required</span>
 </div>
 {% endhighlight %}
 
