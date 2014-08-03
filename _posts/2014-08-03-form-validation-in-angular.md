@@ -14,7 +14,7 @@ In the past, you'd see something like this:
 <input type="url" name="foo" required>
 <div class="validation" ng-show="form.foo.$error">
     <span class="help-block" ng-show="form.foo.$error.url">URL is invalid</span>
-    <span class="help-block" ng-show="!form.foo.$error.url && form.$error.required">URL is required</span>
+    <span class="help-block" ng-show="!form.foo.$error.url && form.foo.$error.required">URL is required</span>
 </div>
 {% endhighlight %}
 
