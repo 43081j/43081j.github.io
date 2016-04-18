@@ -18,13 +18,13 @@ To remove this out-of-place dependency, [carbon-route](https://elements.polymer-
 An example is the best way to show what this does, so here we go:
 
 ```html
-<carbon-location route="{{route}}"></carbon-location>
+<carbon-location route="{% raw %}{{route}}{% endraw %}"></carbon-location>
 
 <carbon-route
 	route="{% raw %}{{route}}{% endraw %}"
 	pattern="/:page"
-	data="{{routeData}}"
-	tail="{{subRoute}}">
+	data="{% raw %}{{routeData}}{% endraw %}"
+	tail="{% raw %}{{subRoute}}{% endraw %}">
 </carbon-route>
 ```
 
@@ -46,19 +46,19 @@ In `index.html`:
 
 ```html
 <carbon-route
-	route="{{route}}"
+	route="{% raw %}{{route}}{% endraw %}"
 	pattern="/:page"
-	data="{{routeData}}"
-	tail="{{subRoute}}">
+	data="{% raw %}{{routeData}}{% endraw %}"
+	tail="{% raw %}{{subRoute}}{% endraw %}">
 </carbon-route>
 
 <iron-pages
 	attr-for-selected="data-route"
-	selected="{{routeData.page}}">
+	selected="{% raw %}{{routeData.page}}{% endraw %}">
 
 	<my-page
 		data-route="test"
-		route="{{subRoute}}">
+		route="{% raw %}{{subRoute}}{% endraw %}">
 	</my-page>
 
 </iron-pages>
@@ -72,9 +72,9 @@ In `my-page.html`:
 
 ```html
 <carbon-route
-	route="{{route}}"
+	route="{% raw %}{{route}}{% endraw %}"
 	pattern="/:id"
-	data="{{routeData}}">
+	data="{% raw %}{{routeData}}{% endraw %}">
 </carbon-route>
 ```
 
