@@ -98,6 +98,24 @@ Even better, the route data is also bound:
 this.set('routeData.id', 500); // Causes a location change to /test/500
 ```
 
+## Another example
+
+This leads to some really cool stuff, like the following:
+
+```html
+<paper-tabs
+	selected="{% raw %}{{routeData.page}}{% endraw %}"
+	attr-for-selected="data-route">
+	
+	<paper-tab data-route="home">Home</paper-tab>
+	<paper-tab data-route="contact">Contact</paper-tab>
+	<paper-tab data-route="about">About</paper-tab>
+
+</paper-tabs>
+```
+
+This very nicely results in the location bar changing to the associated route when a tab becomes active. So if we click `Home`, we change location to `/home` because of the binding `routeData.page` has.
+
 ## To finish
 
 As you can see, this is such a nice addition as we can deal with routes within our Polymer app, keeping with the flow. No longer do we have to resort to external means to handle it, but can put it where it belongs, with the rest of our code.
