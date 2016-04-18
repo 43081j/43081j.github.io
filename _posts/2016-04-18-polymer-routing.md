@@ -21,7 +21,7 @@ An example is the best way to show what this does, so here we go:
 <carbon-location route="{{route}}"></carbon-location>
 
 <carbon-route
-	route="{{route}}"
+	route="{% raw %}{{route}}{% endraw %}"
 	pattern="/:page"
 	data="{{routeData}}"
 	tail="{{subRoute}}">
