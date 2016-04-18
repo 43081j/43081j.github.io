@@ -17,7 +17,7 @@ To remove this out-of-place dependency, [carbon-route](https://elements.polymer-
 
 An example is the best way to show what this does, so here we go:
 
-{% highlight html %}
+```html
 <carbon-location route="{{route}}"></carbon-location>
 
 <carbon-route
@@ -26,7 +26,7 @@ An example is the best way to show what this does, so here we go:
 	data="{{routeData}}"
 	tail="{{subRoute}}">
 </carbon-route>
-{% endhighlight %}
+```
 
 Take straight from the docs, this simply binds in `window.location` through the `carbon-location` element and produces a route object for us.
 
@@ -44,8 +44,7 @@ With `carbon-route`, we now have the ability to match a route and pass the remai
 
 In `index.html`:
 
-{% highlight html %}
-
+```html
 <carbon-route
 	route="{{route}}"
 	pattern="/:page"
@@ -63,8 +62,7 @@ In `index.html`:
 	</my-page>
 
 </iron-pages>
-
-{% endhighlight %}
+```
 
 Here, if we visit `/test` then `routeData.page` will be `test`. If we visit `/test/123`, it will still be `test`. We are matching only the first part of the path essentially, any unmatched goes in our `subRoute` state (as in, `subRoute.path` will be `/123`).
 
@@ -72,15 +70,13 @@ This means we can leave all paths underneath `/test` upto `my-page` to handle, e
 
 In `my-page.html`:
 
-{% highlight html %}
-
+```html
 <carbon-route
 	route="{{route}}"
 	pattern="/:id"
 	data="{{routeData}}">
 </carbon-route>
-
-{% endhightlight %}
+```
 
 So, as you see, `my-page` has no idea about `/test`, it only cares about paths visited below that (in this case, `/123`). Here, `routeData.id` will become `123` for `/test/123`.
 
@@ -90,17 +86,17 @@ Now, the really cool thing I love about `carbon-route` and `carbon-location` is 
 
 The route object that `carbon-location` produces is bound into `window.location`, so we can deal with all location changes within Polymer:
 
-{% highlight javascript %}
+```javascript
 this.set('route.path', '/foo'); // Causes a location change to /foo
-{% endhighlight %}
+```
 
 Remember too, that this all uses the HTML5 history API so there are no actual changes in page.
 
 Even better, the route data is also bound:
 
-{% highlight javascript %}
+```javascript
 this.set('routeData.id', 500); // Causes a location change to /test/500
-{% endhighlight %}
+```
 
 ## To finish
 
