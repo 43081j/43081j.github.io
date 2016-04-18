@@ -32,9 +32,9 @@ Take straight from the docs, this simply binds in `window.location` through the 
 
 The route object essentially holds the state, such as the current path, query string, parameters and so on (now bound to `route` in the example).
 
-The first two parameters are obvious, `{{route}}` is the current route state and `{{routeData}}` holds our parameters (`:page`).
+The first two parameters are obvious, `route` is the current route state and `routeData` holds our parameters (`:page`).
 
-The cool part here is `{{subRoute}}`. 
+The cool part here is `subRoute`. 
 
 ## Sub routing
 
