@@ -42,7 +42,7 @@ Which would allow us to observe when elements intersect with `myElement` rather 
 
 ## Margins and thresholds
 
-When setting up and observer, we can specify two properties other than the root:
+When setting up and observer, we can specify two properties other than the root; the `rootMargin` and `threshold`.
 
 ### `rootMargin`
 
