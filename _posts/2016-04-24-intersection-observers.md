@@ -58,6 +58,14 @@ We can do this by specifying some margin such that we account for a boundary aro
 
 This is simply a ratio, so if we specify `0.5`, we are saying we want to be notified when at least 50% of our observed element intersects the root.
 
+## Visualising this
+
+![Intersections](http://i.imgur.com/b9CHUCM.png)
+
+As you can see in this picture, assuming some change in scroll position just happened on the outer container, `A` and `B` will have triggered intersection changes.
+
+If we had setup our observer with a ratio of `0.5`, both would be in the change array passed to our function. If we instead setup a `rootMargin` which measured to below `C`, that would've also been included.
+
 ## An example
 
 The best way to explain this is an [example](http://plnkr.co/edit/dApDrJWn3WTCH4RhxuOG?p=preview).
