@@ -3,7 +3,7 @@ layout: post
 title: Intersection Observers
 ---
 
-Just landed in Chrome Canary, *Intersection Observers*!
+Just landed in Chrome Canary, **Intersection Observers**!
 
 These essentially allow you to observe the intersection of some element within another, as defined by [this spec](https://wicg.github.io/IntersectionObserver/).
 
