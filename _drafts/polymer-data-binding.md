@@ -5,7 +5,7 @@ title: Polymer Data Binding
 
 Today I'm going to talk about [Polymer](https://www.polymer-project.org/) again, this time on the topic of data binding.
 
-I am going to assume you have already used Polymer and have a basic understanding of it.
+I am going to assume you have already used Polymer and have a basic understanding of it. However, this post will be a little in-depth in parts so feel free to skip over those.
 
 ## The basics
 
