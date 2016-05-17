@@ -77,10 +77,10 @@ This object should really be seen as a definition (some meta data) of each prope
 ```javascript
 Polymer({
 	is: 'my-element',
-	"properties": {
-		"foo": {
-			"type": String,
-			"readOnly": true
+	properties: {
+		foo: {
+			type: String,
+			readOnly: true
 		}
 	}
 });
