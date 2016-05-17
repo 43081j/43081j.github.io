@@ -13,7 +13,7 @@ There are two types of binding, *one way* and *two way*.
 
 A one way binding uses double square brackets (e.g. `[[foo]]`). If `foo` changes, it will be passed _downwards_ to children but they can never pass it back up (change it).
 
-A two way binding uses double curly brackets (e.g. `{% raw %}{{foo}}{% endraw %}`). If `foo` changes, it will be pased _downwards to children. If children then change the value, that change will propagate back up to your element.
+A two way binding uses double curly brackets (e.g. `{% raw %}{{foo}}{% endraw %}`). If `foo` changes, it will be pased _downwards_ to children. If children then change the value, that change will propagate back up to your element.
 
 An example:
 
