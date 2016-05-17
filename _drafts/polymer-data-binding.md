@@ -153,11 +153,11 @@ For example:
 
 ```html
 <element-a>
-	<element-b bar="{% raw %}[[foo]]{% endraw %}"></element-b>
+	<element-b bar="[[foo]]"></element-b>
 </element-a>
 ```
 
-Where `element-a` defines `foo` as `{% raw %}{ "a": 5 }{% endraw %}`.
+Where `element-a` defines `foo` as `{ "a": 5 }`.
 
 If `element-b` changes `foo.a = 6`, `element-a` will _not_ be notified. *However*, `element-a` has the _same_ `foo` object as `element-b` (by reference), so both have the new value (if you access `el.foo.a` on each, it will be `6`).
 
