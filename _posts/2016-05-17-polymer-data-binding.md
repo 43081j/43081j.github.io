@@ -62,7 +62,7 @@ If you want to dig around, you can actually access these effects on your element
 
 It is important to note that bindings only support simple expressions and negations (`[[!foo.bar]]` and `[[foo.bar]]`), as explained [here](https://www.polymer-project.org/1.0/docs/devguide/data-binding.html#expressions-in-binding-annotations).
 
-Often, I see people trying to do things like `{% raw %}{{arr.filter(filterFn)}}{% endraw %}` or `{% raw %}{{foo > bar }}{% endraw %}`. This will _not_ work, because of the above limitation.
+Often, I see people trying to do things like `{% raw %}{{arr.filter(filterFn)}}{% endraw %}` or `{% raw %}{{foo != bar }}{% endraw %}`. This will _not_ work, because of the above limitation.
 
 Personally, I hope they never implement this ability because the lack of it forces a good practice of keeping all your logic in your class.
 
