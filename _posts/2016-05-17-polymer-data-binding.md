@@ -74,7 +74,7 @@ If you have read the docs, you also know we can define a `properties` object on 
 
 This object should really be seen as a definition (some meta data) of each property for more precise handling of it.
 
-```javascript
+```json
 {
 	"properties": {
 		"foo": {
