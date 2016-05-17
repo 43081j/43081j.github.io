@@ -46,7 +46,7 @@ Polymer({
 });
 ```
 
-Basically, your element has an internal `__data__` object. Each property's getter will retrieve the associated value from this object. Each setter will write to it and do some dirty checking (`oldValue !== newValue`) to detect a change (we will talk about this later).
+Basically, your element has an internal state object. Each property's getter will retrieve the associated value from this object. Each setter will write to it and do some dirty checking (`oldValue !== newValue`) to detect a change (we will talk about this later).
 
 ### Property effects
 
@@ -60,9 +60,9 @@ If you want to dig around, you can actually access these effects on your element
 
 ### JavaScript vs binding syntax
 
-It is important to note that bindings are _not_ JavaScript.
+It is important to note that bindings only support simple expressions and negations (`[[!foo.bar]]` and `[[foo.bar]]`), as explained [here](https://www.polymer-project.org/1.0/docs/devguide/data-binding.html#expressions-in-binding-annotations).
 
-Often, I see people trying to do things like `{% raw %}{{arr.filter(filterFn)}}{% endraw %}`. This will _not_ work, because bindings are _not_ actual JavaScript but rather a similar Polymer-specific syntax.
+Often, I see people trying to do things like `{% raw %}{{arr.filter(filterFn)}}{% endraw %}` or `{% raw %}{{foo > bar }}{% endraw %}`. This will _not_ work, because of the above limitation.
 
 Personally, I hope they never implement this ability because the lack of it forces a good practice of keeping all your logic in your class.
 
@@ -90,6 +90,16 @@ As you can see, our foo may already exist because we bound to it somewhere, but 
 To see what you can specify, see the documentation [here](https://www.polymer-project.org/1.0/api/#Polymer.Base:property-properties).
 
 One note to make is, if you specify `readOnly: true`, this actually prevents our previously mentioned setter from ever being created. It does, however, create a private `_setFoo` method so we can set the value internally still.
+
+### To gain two-way binding
+
+To support two-way binding, our element must pass our property down to the child in _curly brackets_.
+
+Additionally, the child must set `notify: true` on their receiving property and must not set `readOnly: true`.
+
+The combination of these conditions means that the child can fire change events _upwards_ and the parent can send changes _downwards_.
+
+Of course, if the child specifies `readOnly: true`, the parent is unable to pass changes _downwards_ to it. Similarly, if the child specifies `notify: false`, it won't pass changes _upwards_ to the parent.
 
 ### Types
 
