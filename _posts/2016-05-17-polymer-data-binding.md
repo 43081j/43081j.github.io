@@ -74,15 +74,16 @@ If you have read the docs, you also know we can define a `properties` object on 
 
 This object should really be seen as a definition (some meta data) of each property for more precise handling of it.
 
-```json
-{
+```javascript
+Polymer({
+	is: 'my-element',
 	"properties": {
 		"foo": {
 			"type": String,
 			"readOnly": true
 		}
 	}
-}
+});
 ```
 
 As you can see, our foo may already exist because we bound to it somewhere, but we are now able to control it more.
