@@ -41,10 +41,9 @@ The solution most people, including myself, seem to come up with is a computed b
 
 Where `_sortAndFilter` returns the sorted and filtered array. Here is a list of each binding I tried and why it was a bad idea:
 
-|Binding                        |Why not?   |
-|`_sortAndFilter(cards)`        |It is computed only when the entire array changes. Splices and sub-property changes don't propagate.|
-|`_sortAndFilter(cards.splices)`|Sub-property changes don't propagate. Array is fully recomputed each time a child is moved/removed/added.|
-|`_sortAndFilter(cards.*)`      |Array is fully recomputed each time any change occurs.|
+* `_sortAndFilter(cards)`:  It is computed only when the entire array changes. Splices and sub-property changes don't propagate.
+* `_sortAndFilter(cards.splices)`: Sub-property changes don't propagate. Array is fully recomputed each time a child is moved/removed/added.
+* `_sortAndFilter(cards.*)`: Array is fully recomputed each time any change occurs.
 
 In all these cases, the array is fully recomputed on any change, so iron-list is forced to do a full refresh. This means you'll likely lose your scroll position, too, a horrible experience for users.
 
