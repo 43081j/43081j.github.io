@@ -98,7 +98,8 @@ Inside `_onDomIfChange`, simply do something like:
 
 ```javascript
     _onDomIfChange: function(e) {
-        this.$.list.updateSizeForItem(e.currentTarget.parentElement);
+        var item = this.$.list.modelForElement(e.currentTarget.parentElement).item;
+        this.$.list.updateSizeForItem(item);
     }
 ```
 
