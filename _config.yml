@@ -5,3 +5,5 @@ markdown: kramdown
 sass:
     sass_dir: css
     style: :compressed
+gems:
+    - jekyll-feed
