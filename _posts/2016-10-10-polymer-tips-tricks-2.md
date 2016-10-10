@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Polymer Tips & Tricks #1
+title: Polymer Tips & Tricks 2
 ---
 
 The second in my Tips & Tricks series! Just a couple this week as, fortunately, I haven't encountered many issues beyond those caused by currently opened issues.

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Polymer Tips & Tricks #1
+title: Polymer Tips & Tricks 1
 ---
 
 This is the first in a series of posts about the various problems I have tackled while using [Polymer](https://polymer-project.org/).
