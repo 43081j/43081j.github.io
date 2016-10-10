@@ -93,7 +93,7 @@ This is a tough problem to solve and there is an issue open for it right now, th
 For now, I do the following check:
 
 ```javascript
-if(Object.keys(this.doc) === 0) {
+if(Object.keys(this.doc).length === 0) {
 ```
 
 It is as hacky as it looks, I know, but it does the job. No firebase document will ever be `{}`, so you know it doesn't exist or hasn't loaded yet.
