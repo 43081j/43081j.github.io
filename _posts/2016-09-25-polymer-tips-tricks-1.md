@@ -49,7 +49,7 @@ In all these cases, the array is fully recomputed on any change, so iron-list is
 
 ### Solution
 
-My solution to this, which you can find [here](http://43081j.com/array-filter), is an element which essentially holds a copy of the initial array with any sorts and filters applied.
+My solution to this, which you can find [here](https://github.com/43081j/array-filter), is an element which essentially holds a copy of the initial array with any sorts and filters applied.
 
 ```html
     <array-filter items="{% raw %}{{cards}}{% endraw %}" filtered="{% raw %}{{_cards}}{% endraw %}" filter="_filterFn" sort="_sortFn"></array-filter>
