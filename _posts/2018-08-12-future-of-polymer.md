@@ -34,6 +34,18 @@ and a "core", which is the core library without the opinionated element classes.
 What I figured I'll do with this post is summarise the basic migration from
 Polymer to Lit.
 
+## For new-comers to Polymer
+
+This post is mostly aimed at helping developers who already use Polymer gain
+an understanding of the path it will take in future.
+
+However, if you're new to it, I still recommend reading some of this and
+the [lit-html](https://polymer.github.io/lit-html/) website to see how it all
+works.
+
+These days, web components have wide support in all major browsers and I would
+recommend them often over using a full blown framework.
+
 # Defining an element
 
 ## Polymer 2.x
