@@ -28,14 +28,11 @@ as it can be mostly automated through the [modulizer](https://www.polymer-projec
 I may have done), go straight to [lit-element](https://github.com/polymer/lit-element)
 
 It looks to me like Polymer 3 will be the last Polymer standalone library.
-Going forward, it will likely one day split into a "legacy" (`PolymerElement`)
+Going forward, it will likely be split into a "legacy" (`PolymerElement`)
 and a "core", which is the core library without the opinionated element classes.
 
 What I figured I'll do with this post is summarise the basic migration from
 Polymer to Lit.
-
-I won't be going into depth so much, but rather listing the quick tips and
-solutions I have found while doing this myself.
 
 # Defining an element
 
@@ -543,3 +540,7 @@ then make your decision.
 If you want to move from Polymer 2.x, it is probably best to go to Polymer
 3.x for now using the [modulizer](https://www.polymer-project.org/3.0/docs/upgrade)
 and then gradually migrate to LitElement how you like.
+
+For a long time, Web Components and Polymer were seen as unstable, ever-changing
+and experimental. Maybe now we can see some wider adoption and grow our community
+more than ever before.
