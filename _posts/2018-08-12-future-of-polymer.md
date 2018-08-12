@@ -1,6 +1,7 @@
 ---
 layout: post
 title: The future of Polymer & lit-html
+description: A summary of the future of Polymer and a path to follow going ahead.
 ---
 
 # Polymer & Lit Element
