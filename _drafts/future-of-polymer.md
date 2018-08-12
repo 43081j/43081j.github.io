@@ -3,7 +3,7 @@ layout: post
 title: The future of Polymer & lit-html
 ---
 
-# Polymer & Lit
+# Polymer & Lit Element
 
 The future of [Polymer](https://www.polymer-project.org/) is something
 many people have been wondering about since the introduction of version 3,
