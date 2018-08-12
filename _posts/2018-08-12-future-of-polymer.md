@@ -34,7 +34,7 @@ and a "core", which is the core library without the opinionated element classes.
 What I figured I'll do with this post is summarise the basic migration from
 Polymer to Lit.
 
-## For new-comers to Polymer
+## For new-comers to Web Components
 
 This post is mostly aimed at helping developers who already use Polymer gain
 an understanding of the path it will take in future.
