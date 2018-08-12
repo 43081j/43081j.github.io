@@ -1,9 +1,10 @@
-exclude: ['README.md', 'Gruntfile.js', 'src/', 'node_modules', 'package.json']
+exclude: ['README.md', 'Gruntfile.js', 'src/', 'node_modules', 'package.json', 'vendor']
 permalink: /:year/:month/:title
 paginate: 12
 markdown: kramdown
 sass:
     sass_dir: css
     style: :compressed
-gems:
+plugins:
     - jekyll-feed
+    - jekyll-paginate

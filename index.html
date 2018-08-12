@@ -11,7 +11,7 @@ title: 43081j
 				{% if post.external %}<a href="{{ post.external }}" target="_blank" title="{{ post.title }}">
 				{% else %}<a href="{{ post.url }}">{% endif %}{{ post.title }}</a>
 			</h2>
-			<span class="meta">{{ post.date || date: "%B %e, %Y" }}</span>
+			<span class="meta">{{ post.date | date: "%B %e, %Y" }}</span>
 		</li>
 		{% endfor %}
 	</ul>
