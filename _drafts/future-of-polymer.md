@@ -22,14 +22,14 @@ For a while, this question had no clear answer. However, it seems we now have
 a rough idea:
 
 * **If coming from Polymer 2**, Polymer 3 is something you should upgrade to,
-as it is generally simpler than a rewrite into Lit (you can [use the modulizer](https://www.polymer-project.org/3.0/docs/upgrade))
+as it can be mostly automated through the [modulizer](https://www.polymer-project.org/3.0/docs/upgrade)
 * **If starting from new**, you should use [lit-element](https://github.com/polymer/lit-element)
 * If you want to go all in, do a full conversion and drink buckets of coffee (like
 I may have done), go straight to [lit-element](https://github.com/polymer/lit-element)
 
-It looks to me like Polymer 3 will be the last Polymer. My guess is that it
-will one day split into a "legacy" (`PolymerElement`) and a "core",
-which is the core library without the opinionated element classes.
+It looks to me like Polymer 3 will be the last Polymer standalone library.
+Going forward, it will likely one day split into a "legacy" (`PolymerElement`)
+and a "core", which is the core library without the opinionated element classes.
 
 What I figured I'll do with this post is summarise the basic migration from
 Polymer to Lit.
@@ -88,10 +88,13 @@ The huge difference between Polymer 2 and Lit is the loss of
 `dom-module`. Templates are now defined in JavaScript... which is a kind of
 love or hate situation.
 
-There is a proposal somewhere to allow these templates to come from HTML files,
-for those who want it separate.
+There is a [proposal](https://github.com/w3c/webcomponents/issues/645) to allow
+these templates to come from HTML files, for those who want it separate.
 
 # Bindings
+
+All bindings in Lit are native JavaScript expressions unlike Polymer's
+custom HTML syntax.
 
 Here's a quick summary of how bindings have changed:
 
@@ -113,9 +116,7 @@ Bindings are one-way in Lit, seeing as they are simply passed down in JavaScript
 expressions. There is no concept of two-way binding or pushing new values upwards
 in the tree.
 
-There are ways to get around this, but the idea is you will implement those
-concepts yourself using a third-party library or events rather than Lit
-becoming very heavy and shipping with it by default.
+Instead of two-way bindings, you can now make use of events or a state store.
 
 This can be very simple to implement if an event already exists, such as
 with an input element:
@@ -136,8 +137,11 @@ to the value.
 # Helper Elements
 
 Polymer has a few helper elements to provide a solution to very common
-concepts/functionality. While these don't exist in Lit, they are easy to
-implement through native means.
+concepts/functionality.
+
+Instead of these DOM elements, you can simply implement the same logic by
+taking advantage of JavaScript's features natively, using conditionals and
+flow control like you would in any other part of your code.
 
 ## `dom-repeat`
 
@@ -187,48 +191,6 @@ the render method.
 ```js
 return html`<span>Condition was ${this.condition ? 'truthy' : 'falsy'}</span>`;
 ```
-
-# Routing
-
-The `app-route` element is a bit of an anti-pattern. It was always a little
-unusual to define routing information in markup. It was pretty much a wrapper
-around a useful library.
-
-Anyhow, when using Lit we have no such element so you may be wondering what
-we should use instead.
-
-The answer to this is: whatever you want.
-
-Here are a few libraries:
-
-* [page.js](https://github.com/visionmedia/page.js)
-* [director](https://github.com/flatiron/director)
-* Create your own!
-
-I opted with [page.js](https://github.com/visionmedia/page.js) as I have a fairly
-simple routing strategy and only need to re-render when one parameter changes:
-
-```js
-class MyElement extends LitElement {
-  static get properties() {
-    return { _view: String };
-  }
-
-  constructor() {
-    page('/view/:view', (ctx) => {
-      this._view = ctx.params.view;
-    });
-    page();
-  }
-}
-```
-
-However, this is just a quick example and should be taken with a grain of
-salt. There are several problems, like re-using this element will try to
-re-define the routes and make bad things happen!
-
-Also, I only ever have one instance of this element so don't have to worry
-about doing this logic in the constructor.
 
 # Custom Styles
 
@@ -514,6 +476,48 @@ disconnectedCallback() {
 }
 ```
 
+# Routing
+
+The `app-route` element is a bit of an anti-pattern. It was always a little
+unusual to define routing information in markup. It was pretty much a wrapper
+around a useful library.
+
+Anyhow, when using Lit we have no such element so you may be wondering what
+we should use instead.
+
+The answer to this is: whatever you want.
+
+Here are a few libraries:
+
+* [page.js](https://github.com/visionmedia/page.js)
+* [director](https://github.com/flatiron/director)
+* Create your own!
+
+I opted with [page.js](https://github.com/visionmedia/page.js) as I have a fairly
+simple routing strategy and only need to re-render when one parameter changes:
+
+```js
+class MyElement extends LitElement {
+  static get properties() {
+    return { _view: String };
+  }
+
+  constructor() {
+    page('/view/:view', (ctx) => {
+      this._view = ctx.params.view;
+    });
+    page();
+  }
+}
+```
+
+However, this is just a quick example and should be taken with a grain of
+salt. There are several problems, like re-using this element will try to
+re-define the routes and make bad things happen!
+
+Also, I only ever have one instance of this element so don't have to worry
+about doing this logic in the constructor.
+
 # Wrap up
 
 As you can see, [lit-element](https://github.com/polymer/lit-element) is
@@ -533,8 +537,9 @@ These and plenty more questions are really to be asked to the Polymer team,
 but I personally would hold off on using it in production until they have
 answers.
 
-My opinion on this is that you let Lit settle a bit, see it reach 1.x and
+My opinion on this is that you let Lit settle a bit, see it reach 1.0 and
 then make your decision.
 
-**If you want to move from Polymer 2.x, it is probably best to go to Polymer
-3.x for now.**
+If you want to move from Polymer 2.x, it is probably best to go to Polymer
+3.x for now using the [modulizer](https://www.polymer-project.org/3.0/docs/upgrade)
+and then gradually migrate to LitElement how you like.
