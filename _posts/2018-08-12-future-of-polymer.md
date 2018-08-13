@@ -319,14 +319,16 @@ some kind of base class or helper which provides the functionality generically.
 Lit may consider providing an option to enable this in future, but that seems
 to be under discussion as of the time this was written.
 
-Do note, it may seem tempting to implement a setter for this reason:
+You could also try doing this in a setter:
 
 ```js
 set myProp(val) {
   this.setAttribute('my-prop', val);
-  this._myProp = val;
+  this._setProperty('myProp', val);
 }
 ```
+
+Though `_setProperty` may one day go away if Lit stops depending on the Polymer properties mixin.
 
 However, this will not work because Lit (the Polymer core internally, actually)
 will replace the setter.
