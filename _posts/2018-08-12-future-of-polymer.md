@@ -548,6 +548,11 @@ These and plenty more questions are really to be asked to the Polymer team,
 but I personally would hold off on using it in production until they have
 answers.
 
+The last question is one a lot of people will be asking because Polymer
+experienced it a few times. Most or all of the specs are now stable and
+widely accepted, so its safe to say Lit likely won't go through those
+same drastic changes.
+
 My opinion on this is that you let Lit settle a bit, see it reach 1.0 and
 then make your decision.
 
