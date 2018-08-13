@@ -330,9 +330,6 @@ set myProp(val) {
 
 Though `_setProperty` may one day go away if Lit stops depending on the Polymer properties mixin.
 
-However, this will not work because Lit (the Polymer core internally, actually)
-will replace the setter.
-
 ### `value`
 
 Default values are as simple as setting them in the constructor:
