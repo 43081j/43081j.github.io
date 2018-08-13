@@ -120,6 +120,8 @@ Here's a quick summary of how bindings have changed:
 There's a nice summary [here](https://polymer.github.io/lit-html/guide/writing-templates.html#binding-types)
 about the different syntaxes used.
 
+**Do note: This syntax is still new to lit-html so hasn't yet made it into LitElement (it is [in progress](https://github.com/Polymer/lit-element/issues/123)).**
+
 ## Two-way bindings
 
 Bindings are one-way in Lit, seeing as they are simply passed down in JavaScript
