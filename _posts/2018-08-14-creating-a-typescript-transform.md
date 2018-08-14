@@ -215,8 +215,8 @@ if (ts.isClassDeclaration(node) && node.decorators && node.name) {
 We only care about class declarations because we should only
 allow `@customElement` on a class in our case.
 
-We also only care if there are decorators as it is clear ours isn't
-there otherwise, and that the class has a name.
+We also only care if the class has a name and there are
+decorators as it is clear ours isn't there otherwise.
 
 Next, we try find our decorator:
 
