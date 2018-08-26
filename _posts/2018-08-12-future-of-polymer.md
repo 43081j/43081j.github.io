@@ -14,8 +14,7 @@ On one of our largest projects, I started to (slowly) migrate from 1.x to 2.x
 around the same time the Polymer team were working on building 3.x and lit-html.
 
 Polymer 3.x and [lit-element](https://github.com/polymer/lit-element) seem
-to achieve the same goal in different ways. In fact, the `LitElement` class
-even inherits some of Polymer's core mixins for property logic.
+to achieve the same goal in different ways.
 
 **So where do we go after Polymer 2.x?**
 
@@ -34,6 +33,14 @@ and a "core", which is the core library without the opinionated element classes.
 
 What I figured I'll do with this post is summarise the basic migration from
 Polymer to Lit.
+
+## Update (August 2018)
+
+Since the writing of this post, LitElement removed its
+dependency on Polymer completely. It also introduced a lot of the
+functionality I had previously written about the lack of.
+
+This post has now been updated.
 
 ## For new-comers to Web Components
 
@@ -84,7 +91,7 @@ customElements.define('my-polymer-element', MyPolymerElement);
 import {LitElement, html} from '@polymer/lit-element';
 
 class MyLitElement extends LitElement {
-  _render() {
+  render() {
     return html`My element!`;
   }
 }
@@ -114,13 +121,11 @@ Here's a quick summary of how bindings have changed:
 | `{% raw %}{{foo}}{% endraw %}` | `${this.foo}` with an event listener (e.g. `input` on inputs) |
 | `<my-el prop="[[foo]]">` | `<my-el .prop=${this.foo}>` |
 | `<my-el prop$="[[foo]]">` | `<my-el prop=${this.foo}>` |
-| `<input checked="[[checked]]">` | `<input checked?=${this.checked}>` |
+| `<input checked="[[checked]]">` | `<input ?checked=${this.checked}>` |
 | `<button on-click="_onClick">` | `<button @click=${(e) => this._onClick(e)}>` |
 
 There's a nice summary [here](https://polymer.github.io/lit-html/guide/writing-templates.html#binding-types)
 about the different syntaxes used.
-
-**Do note: This syntax is still new to lit-html so hasn't yet made it into LitElement (it is [in progress](https://github.com/Polymer/lit-element/issues/123)).**
 
 ## Two-way bindings
 
@@ -134,7 +139,7 @@ This can be very simple to implement if an event already exists, such as
 with an input element:
 
 ```js
-_render() {
+render() {
   return html`<input type="text" @input=${(e) => this._onInput(e)}>`;
 }
 
@@ -226,7 +231,7 @@ With Lit, we no longer have such a concept as a style can simply be shared
 through interpolation:
 
 ```js
-_render() {
+render() {
   const sharedStyles = getSharedStyles(); // Could come from a file, wherever.
   return html`
     <style>${sharedStyles}</style>
@@ -241,9 +246,8 @@ there is no longer a need for a module and what not.
 
 Now the fun part! Properties...
 
-Properties in Lit are incredibly simple compared to the fairly configurable
-ones we had in Polymer. The reason for this is probably to keep it very light
-and leave implementation of those extra things to us.
+Properties in Lit are configured in a very similar fashion to Polymer. They
+define their type and a couple of options.
 
 ## Polymer
 
@@ -264,14 +268,26 @@ static get properties() {
 ```js
 static get properties() {
   return {
-    myProperty: Boolean,
-    mySecondProperty: String
+    myProperty: { type: Boolean },
+    mySecondProperty: {
+      type: String,
+      reflect: true
+    }
   };
 }
 ```
 
-As you can see, all of the configuration falls away and we're left with a very
-basic list of our properties/types.
+As you can see, the two definitions are very similar. Though Lit does
+drop a few options. Lit also goes a little further by providing a useful
+decorator for this too:
+
+```js
+@property({ type: Boolean })
+myProperty = false;
+```
+
+Do note, though, decorators will need something like TypeScript or
+Babel to be used (for now).
 
 ## Private and Protected Properties
 
@@ -281,9 +297,9 @@ still be defined as Lit properties in our `properties` getter:
 ```js
 static get properties() {
   return {
-    myProp: String,
-    _myProtectedProp: String,
-    __myPrivateProp: String
+    myProp: { type: String },
+    _myProtectedProp: { type: String },
+    __myPrivateProp: { type: String }
   }
 }
 ```
@@ -294,41 +310,25 @@ invisible in the DOM but can still be observed by Lit to trigger re-renders.
 
 ## Property Configuration
 
-As mentioned above, most of the configuration of properties has gone away. So
+As mentioned above, a few options of properties have gone away. So
 here is a what we can do instead...
 
 ### `reflectToAttribute`
 
-To reproduce Polymer's `reflectAttribute` option, we can simply do:
+Lit maintains this functionality but under the option `reflect` instead:
 
 ```js
 class MyElement extends LitElement {
   static get properties() {
-    return { myProp: String };
-  }
-
-  _didRender() {
-    this.setAttribute('myProp', this.myProp);
+    return {
+      myProp: {
+        type: String,
+        reflect: true
+      }
+    };
   }
 }
 ```
-
-If this becomes a common thing you do, it may be worth implementing
-some kind of base class or helper which provides the functionality generically.
-
-Lit may consider providing an option to enable this in future, but that seems
-to be under discussion as of the time this was written.
-
-You could also try doing this in a setter:
-
-```js
-set myProp(val) {
-  this.setAttribute('my-prop', val);
-  this._setProperty('myProp', val);
-}
-```
-
-Though `_setProperty` may one day go away if Lit stops depending on the Polymer properties mixin.
 
 ### `value`
 
@@ -337,7 +337,7 @@ Default values are as simple as setting them in the constructor:
 ```js
 class MyElement extends LitElement {
   static get properties() {
-    return { myProp: String };
+    return { myProp: { type: String } };
   }
 
   constructor() {
@@ -355,7 +355,7 @@ re-create it with regular JavaScript getters:
 ```js
 class MyElement extends LitElement {
   static get properties() {
-    return { _myProperty: String };
+    return { _myProperty: { type: String } };
   }
 
   get readOnlyProperty() {
@@ -393,8 +393,8 @@ Instead of Polymer's `computed` option, you can simply use a getter:
 class MyElement extends LitElement {
   static get properties() {
     return {
-      prop1: String,
-      prop2: String
+      prop1: { type: String },
+      prop2: { type: String }
     };
   }
 
@@ -402,7 +402,7 @@ class MyElement extends LitElement {
     return `${this.prop1}${this.prop2}`;
   }
 
-  _render() {
+  render() {
     return html`Value is: ${this.computedProperty}`;
   }
 }
@@ -419,17 +419,12 @@ the need for them goes away with the ability to just call methods in our
 render method.
 
 However, if you do want to do something when a property changes, I suppose
-the best place for it is in the `_didRender` method:
+the best place for it is in the `update` method:
 
 ```js
-_didRender(props, changedProps, prevProps) {
-  if (changedProps.hasOwnProperty('myProp')) {
-    this._onMyPropChanged(this.myProp, changedProps.myProp);
-  }
-
-  // or do your own dirty checking
-  if (isDirty(this.myProp, prevProps.myProp)) {
-    this._onMyPropChanged(this.myProp, prevProps.myProp);
+update(changedProps) {
+  if (changedProps.has('myProp')) {
+    this._onMyPropChanged(this.myProp, changedProps.get('myProp'));
   }
 }
 ```
@@ -448,7 +443,7 @@ check.
 Event handlers can be added to elements in a similar way to Polymer:
 
 ```js
-_render() {
+render() {
   return html`<button @click=${(e) => this._onClick(e)}>`;
 }
 ```
@@ -462,7 +457,7 @@ constructor() {
   this._boundOnClick = this._onClick.bind(this);
 }
 
-_render() {
+render() {
   return html`<button @click=${this._boundOnClick}>`;
 }
 ```
@@ -510,7 +505,7 @@ simple routing strategy and only need to re-render when one parameter changes:
 ```js
 class MyElement extends LitElement {
   static get properties() {
-    return { _view: String };
+    return { _view: { type: String } };
   }
 
   constructor() {
