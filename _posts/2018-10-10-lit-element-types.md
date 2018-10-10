@@ -14,6 +14,9 @@ the new [LitElement](https://github.com/Polymer/lit-element)...
 The confusion? What are property types? How do we use properties? How
 do things serialize and deserialize? How does this compare to Polymer?
 
+**This only applies if you pass values by attributes or reflect your
+properties!**
+
 Well here we are...
 
 ## Polymer
