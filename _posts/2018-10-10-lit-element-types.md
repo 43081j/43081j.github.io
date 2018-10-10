@@ -80,16 +80,17 @@ Let's take a look:
 
 * `<my-element prop1="foo">` gives us `node.prop1 === "foo"`
 * `<my-element prop2="true">` gives us `node.prop2 === true`
-* `<my-element prop2="false">` gives us `node.prop2 === true`
-* `<my-element prop3='{ "foo": 5 }'>` gives us `node.prop3 === '{ "foo" : 5 }'`
-* `<my-element prop4="[1,2,3]">` gives us `node.prop4 === "[1,2,3]"`
+* `<my-element prop2="false">` gives us **`node.prop2 === true`**
+* `<my-element prop3='{ "foo": 5 }'>` gives us
+**`node.prop3 === '{ "foo" : 5 }'`**
+* `<my-element prop4="[1,2,3]">` gives us **`node.prop4 === "[1,2,3]"`**
 
 You can see the last 3 are confusingly wrong. This is likely not what you
 expected at all.
 
 ## How it works
 
-A property type in Lit is _in reality_ a (de)serializer object or function.
+**A property type in Lit is a serializer object or function.**
 
 When we `node.setAttribute('prop1', 'foo')` or `<my-el prop1="foo">`, we
 actually end up invoking `node.prop1 = String('foo')`.
@@ -145,10 +146,14 @@ that is what `[4,5,6].toString()` results in.
 For cases where we want to handle serialization for reflecting values to
 attributes, such as in the case of arrays, we need to provide an object:
 
-```
+```js
 const deserializer = {
-  toAttribute(val) { return JSON.stringify(val); }
-  fromAttribute(str) { return JSON.parse(str); }
+  toAttribute(val) {
+    return JSON.stringify(val);
+  }
+  fromAttribute(str) {
+    return JSON.parse(str);
+  }
 };
 ```
 
@@ -183,6 +188,8 @@ String('foo') === 'foo'
 
 You see, these constructors happen to behave the same way we want a
 deserializer function to behave (though `Boolean` is _slightly_ different).
+
+Boolean is different because Lit handles `null` as `false`, for you.
 
 ## Conclusion
 
