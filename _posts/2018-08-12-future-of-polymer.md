@@ -419,10 +419,10 @@ the need for them goes away with the ability to just call methods in our
 render method.
 
 However, if you do want to do something when a property changes, I suppose
-the best place for it is in the `update` method:
+the best place for it is in the `updated` method:
 
 ```js
-update(changedProps) {
+updated(changedProps) {
   if (changedProps.has('myProp')) {
     this._onMyPropChanged(this.myProp, changedProps.get('myProp'));
   }
