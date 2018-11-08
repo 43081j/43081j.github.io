@@ -67,7 +67,7 @@ export class MyElement extends LitElement {
 customElements.define('my-element', MyElement);
 
 // src/index.js
-export {MyElement} from './my-element';
+import {MyElement} from './my-element';
 ```
 
 As you can see, it is fairly straight forward. More information on the
