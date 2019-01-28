@@ -1,6 +1,6 @@
 ---
 layout: post
-title: First thoughs on Deno, the JavaScript/TypeScript run-time
+title: First thoughts on Deno, the JavaScript/TypeScript run-time
 description: First thoughts on using the new JavaScript/TypeScript run-time
 built on top of V8: Deno.
 ---
