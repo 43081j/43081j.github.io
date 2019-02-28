@@ -59,7 +59,7 @@ Install:
 $ npm i -D eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin
 ```
 
-Configure:
+Configure `.eslintrc.json`:
 
 ```json
 {
