@@ -90,3 +90,19 @@ $ eslint "src/**/*.ts"
 ```
 
 Easy as that!
+
+## Recommended tweaks/tips
+
+I would personally recommend you disable the
+`@typescript-eslint/no-unused-vars` rule. This can and should be replaced with
+the following entries in your `tsconfig.json`:
+
+* `"noUnusedLocals": true`
+* `"noUnusedParameters": true`
+
+More to do with ESLint as a whole than just `@typescript-eslint`, you should
+probably disable stylistic rules such as `indent` and use a code formatter
+instead.
+
+I use [prettier](https://prettier.io/) in half of my repositories and
+[clang-format](https://clang.llvm.org/docs/ClangFormat.html) in the other half.
