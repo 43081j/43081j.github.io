@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: The State of TypeScript & ESLint in 2019
