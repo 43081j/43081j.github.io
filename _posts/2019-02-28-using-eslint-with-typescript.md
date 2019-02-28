@@ -137,7 +137,7 @@ become redundant in future so use it as you feel best.
 
 It is more of a personal preference.
 
-### Use a code formatter
+### Use a code formatter instead of stylistic rules
 
 I've tried having very strict lint rules for formatting, checking things
 like indentation, spacing and trailing commas.
