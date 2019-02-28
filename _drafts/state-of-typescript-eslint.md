@@ -100,6 +100,15 @@ the following entries in your `tsconfig.json`:
 * `"noUnusedLocals": true`
 * `"noUnusedParameters": true`
 
+Another useful one is member naming conventions:
+
+```json
+    "@typescript-eslint/member-naming": ["error", {
+      "private": "^_",
+      "protected": "^_"
+    }],
+```
+
 More to do with ESLint as a whole than just `@typescript-eslint`, you should
 probably disable stylistic rules such as `indent` and use a code formatter
 instead.
