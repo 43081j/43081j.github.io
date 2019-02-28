@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The State of TypeScript & ESLint in 2019
+title: Using ESLint with TypeScript in 2019
 description: Linting TypeScript projects in 2019 and the way forward
 ---
 
@@ -49,7 +49,8 @@ Part of TSLint's contributions (and plenty of other people already
 contributing to this) will be to add type-system knowledge to the rules
 so much stronger assertions can be built.
 
-For now, this is still in progress for many rules.
+This'll change/improve **very soon** as rules are already beginning to make use
+of the type system.
 
 ## Using ESLint on TypeScript today
 
@@ -91,28 +92,119 @@ $ eslint "src/**/*.ts"
 
 Easy as that!
 
-## Recommended tweaks/tips
+## Recommendations
 
-I would personally recommend you disable the
-`@typescript-eslint/no-unused-vars` rule. This can and should be replaced with
-the following entries in your `tsconfig.json`:
+### Choose compilation options over lint rules
 
-* `"noUnusedLocals": true`
-* `"noUnusedParameters": true`
+You should usually choose compilation checks which the TypeScript
+compiler handles rather than relying on the looser lint rules.
+
+In particular, disable the `@typescript-eslint/no-unused-vars` rule and use
+the following options in your `tsconfig.json` instead:
+
+```ts
+{
+  "compilerOptions": {
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strict": true // This is useful too, to enable several strict checks
+  }
+}
+```
+
+### Naming conventions
 
 Another useful one is member naming conventions:
 
 ```json
+{
+  "rules": {
     "@typescript-eslint/member-naming": ["error", {
-      "private": "^_",
+      "private": "^__",
       "protected": "^_"
-    }],
+    }]
+  }
+}
 ```
 
-More to do with ESLint as a whole than just `@typescript-eslint`, you should
-probably disable stylistic rules such as `indent` and use a code formatter
-instead.
+This will enforce a convention many people already follow:
 
-I use [prettier](https://prettier.io/) in half of my repositories and
-[clang-format](https://clang.llvm.org/docs/ClangFormat.html) in the other
-half (gradually moving towards prettier, _I think_).
+* Private members begin with `__`
+* Protected members begin with `_`
+
+With the introduction of private class fields coming soon, this may well
+become redundant in future so use it as you feel best.
+
+It is more of a personal preference.
+
+### Use a code formatter
+
+I've tried having very strict lint rules for formatting, checking things
+like indentation, spacing and trailing commas.
+
+It always results in a painful development process unless you just happen
+to have a personal preference for the exact same style. This is of course very
+unlikely as we all have our own opinion.
+
+A much better solution is to **disable all formatting related lint rules**
+and instead use a formatter.
+
+Two I use are:
+
+* [prettier](https://prettier.io/)
+* [clang-format](https://clang.llvm.org/docs/ClangFormat.html)
+
+I'm gradually moving towards prettier, _I think_, but both generally do
+a good job (and offer different styles so it is far from "which is best?").
+
+I use the following `.prettierrc`:
+
+```
+---
+bracketSpacing: false
+printWidth: 80
+semi: true
+singleQuote: true
+tabWidth: 2
+useTabs: false
+arrowParens: always
+```
+
+I use the following `.clang-format`:
+
+```
+BasedOnStyle: Google
+AlignAfterOpenBracket: AlwaysBreak
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowShortBlocksOnASingleLine: false
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+BinPackArguments: false
+```
+
+Generally, ESLint will play nicely with both of these as long as you
+remembered to turn off any
+[stylistic rules](https://eslint.org/docs/rules/#stylistic-issues).
+
+### Use a `.editorconfig` file
+
+One last thing which isn't so much ESLint related is something I'd just
+like to see people do more often.
+
+Get into the habit of introducing a [`.editorconfig`](https://editorconfig.org)
+file like so:
+
+```
+[*]
+end_of_line = lf
+indent_size = 2
+indent_style = space
+trim_trailing_whitespace = true
+```
+
+This makes your codebase _much_ easier to edit by other people while
+maintaing the same whitespace and indentation rules.
+
+Almost all editors support this out of the box.
