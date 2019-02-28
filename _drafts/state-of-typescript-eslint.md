@@ -1,3 +1,4 @@
+
 ---
 layout: post
 title: The State of TypeScript & ESLint in 2019
@@ -105,4 +106,5 @@ probably disable stylistic rules such as `indent` and use a code formatter
 instead.
 
 I use [prettier](https://prettier.io/) in half of my repositories and
-[clang-format](https://clang.llvm.org/docs/ClangFormat.html) in the other half.
+[clang-format](https://clang.llvm.org/docs/ClangFormat.html) in the other
+half (gradually moving towards prettier, _I think_).
