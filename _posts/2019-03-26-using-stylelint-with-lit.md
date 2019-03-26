@@ -165,17 +165,18 @@ easier:
 
 ## Wrap up
 
-So this was a quick one, I know, but hopefully it helps out those of you
-who ran into the same issue I did.
+I was stuck for quite some time having literally no clue how on earth
+I lint some "pseudo-CSS" from inside some template expression. A few people
+seemed to be in the same situation, so I hope this helped you out and
+gave a good idea of the direction to head in.
 
-Of course, go ahead and configure all the rules you want on top of this
-and personalise it as you please. This is just a quick base config for you
-to build on.
+Don't forget to try out a code formatter too, such as
+[prettier](https://github.com/prettier/prettier)! You should totally make
+use of something like this instead of relying on stylistic lint rules.
 
-Oh and while I do say, "lint all the things", I would highly recommend
-you turn off most or all stylistic lint rules (in JS and CSS) and use
-a formatter such as [prettier](https://github.com/prettier/prettier)
-instead.
+I had such crazily customised lint rules until I came to the revelation that
+I just need to format code automatically instead of relying on _mere humans_.
+Now our development process is much smoother, highly recommended.
 
-Enjoy becoming as much of a pain as I am with my error-level max
+Anyhow, enjoy becoming as much of a pain as I am with my error-level max
 line length and JSDoc rules :x
