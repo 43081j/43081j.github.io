@@ -86,13 +86,19 @@ and which import name to extract CSS from with a bit of config:
 
 ```js
 {
-  "moduleName": "lit-element", // Only look for a `css` from lit-element
-  "importName": "css", // Only look for `css`
-  "strict": true // Enable strict mode
+  "importName": "css",
+  "moduleName": "lit-element",
+  "strict": true
 }
 ```
 
-This is all fairly obvious.
+Each of these has the following meaning:
+
+* `importName` specifies which function to parse template strings for
+* `moduleName` specifies which module the function we specified must be
+imported from (to avoid parsing non-lit `css` functions)
+* `strict` specifies that we only want to parse this specific import
+from the module we specified
 
 The `strict` flag is a recent addition from me. I added it because
 the processor's default behaviour is to extract CSS from _all_ lit-element
