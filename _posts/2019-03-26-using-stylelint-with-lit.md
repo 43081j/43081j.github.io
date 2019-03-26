@@ -54,7 +54,7 @@ class FooElement extends LitElement {
 
 ## The problem & solution
 
-So, as mentioned before, the problem here is that the styles exist inside
+As mentioned before, the problem here is that the styles exist inside
 a template literal rather than an actual stylesheet (i.e. a css file).
 
 Due to this, stylelint can't lint it out of the box as it has no idea
