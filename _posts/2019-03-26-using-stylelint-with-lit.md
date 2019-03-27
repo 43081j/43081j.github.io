@@ -121,7 +121,7 @@ $ npm i -D stylelint
 
 ### Configure
 
-Create a `.stylelinrc.json`:
+Create a `.stylelintrc.json`:
 
 ```json
 {
