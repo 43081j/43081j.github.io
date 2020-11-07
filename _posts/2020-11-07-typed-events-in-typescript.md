@@ -115,10 +115,17 @@ interface MyEventMap {
 
 class MyElement extends HTMLElement {
   public addEventListener<T extends keyof MyEventMap>(
+    // the event name, a key of MyEventMap
     type: T,
+
+    // the listener, using a value of MyEventMap
     listener: (this: MyElement, ev: MyEventMap[T]) => any,
+
+    // any options
     options?: boolean | AddEventListenerOptions
   ): void;
+
+  // the fallback for any event names not in our map
   public addEventListener(
     type: string,
     listener: (this: MyElement, ev: Event) => any,
@@ -136,6 +143,10 @@ node.addEventListener(
   (ev) => { ... } // ev is a `CustomEvent<{foo: number}>`
 );
 ```
+
+It looks like there's a lot going on here, but really we are just copying
+what the original definition of `addEventListener` is from TypeScript's
+DOM definitions.
 
 ## Wrap up
 
