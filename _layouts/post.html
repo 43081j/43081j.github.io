@@ -31,15 +31,4 @@
 	</div>
 </article>
 
-<script>
-var disqus_shortname = '43081j',
-	disqus_title = '{{ page.title }}',
-	disqus_url = {% if page.disqus %}'{{ page.disqus }}'{% else %}'http://43081j.com{{ page.url }}'{% endif %};
-(function() {
-	var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-	dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-	(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-
 {% include footer.html %}
