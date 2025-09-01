@@ -1,6 +1,7 @@
 exclude: ['README.md', 'Gruntfile.js', 'src/', 'node_modules', 'package.json', 'vendor']
 permalink: /:year/:month/:title
 paginate: 12
+paginate_path: "/blog/page-:num/"
 markdown: kramdown
 sass:
     sass_dir: css

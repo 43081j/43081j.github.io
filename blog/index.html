@@ -1,0 +1,32 @@
+---
+layout: default
+title: Blog
+paginate_path: "/blog/page:num/"
+---
+
+<div class="posts">
+	<h1>Blog</h1>
+	<ul>
+		{% for post in paginator.posts %}
+		<li>
+			<h2>
+				{% if post.external %}<a href="{{ post.external }}" target="_blank" title="{{ post.title }}">
+				{% else %}<a href="{{ post.url }}">{% endif %}{{ post.title }}</a>
+			</h2>
+			<span class="meta">{{ post.date | date: "%B %e, %Y" }}</span>
+		</li>
+		{% endfor %}
+	</ul>
+	<div class="pager">
+		{% if paginator.previous_page %}
+			{% if paginator.previous_page == 1 %}
+			<a href="/blog/" class="pager-left"><i class="fa fa-chevron-left"></i> Previous</a>
+			{% else %}
+			<a href="{{ paginator.previous_page_path }}" class="pager-left"><i class="fa fa-chevron-left"></i> Previous</a>
+			{% endif %}
+		{% endif %}
+		{% if paginator.next_page %}
+			<a href="{{ paginator.next_page_path }}" class="pager-right">Next <i class="fa fa-chevron-right"></i></a>
+		{% endif %}
+	</div>
+</div>

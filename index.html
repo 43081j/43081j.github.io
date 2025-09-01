@@ -3,28 +3,51 @@ layout: default
 title: 43081j
 ---
 
-<div class="posts">
+<div class="home">
+	<h1>Welcome!</h1>
+
+  <p>Hi, I'm James!</p>
+  <p>Usually found under the handle <a href="https://github.com/43081j">@43081j</a>, I'm a maintainer and regular contributor to many open source projects. This is my personal website where I occasionally write about travels and open source stuff.</p>
+
+  <h2>What I work on</h2>
+
+  <p>I maintain plenty of open source projects, and contribute to many more.</p>
+
+  <h3>Leader or Maintainer</h3>
+
+  <ul>
+    <li><a href="https://e18e.dev">e18e</a> - a community focused on improving performance of the JS ecosystem</li>
+    <li><a href="https://github.com/tinylibs">tinylibs</a> - a collection of small, performant libraries</li>
+    <li><a href="https://github.com/chaijs/chai">chai</a> - a test assertion library</li>
+    <li><a href="https://github.com/vueuse/vueuse">VueUse</a> - a collection of Vue Composition utilities</li>
+    <li><a href="https://github.com/unjs/">unjs</a> - a collection of performant, platform-agonostic utilities</li>
+    <li><a href="https://github.com/paulmillr/chokidar">chokidar</a> - a file watching library</li>
+    <li><a href="https://github.com/bombshell-dev/clack">clack</a> - a CLI framework</li>
+    <li><a href="https://github.com/43081j/eslint-plugin-lit">eslint-plugin-lit</a> - ESLint rules for Lit</li>
+    <li><a href="https://github.com/43081j/eslint-plugin-wc">eslint-plugin-wc</a> - ESLint rules for Web Components</li>
+    <li><a href="https://github.com/43081j/picoquery">picoquery</a> - a tiny query string parser &amp; serializer</li>
+    <li><a href="https://github.com/inikulin/parse5">parse5</a> - a HTML parser &amp; serializer</li>
+    <li><a href="https://github.com/es-tooling">es-tooling</a> - a collection of tools by the e18e community</li>
+    <li><a href="https://github.com/43081j/relit">relit</a> - a collection of utilities for lit</li>
+  </ul>
+
+  <h3>Regular Contributor</h3>
+
+  <ul>
+    <li><a href="https://github.com/storybookjs/storybook">storybook</a></li>
+    <li><a href="https://github.com/lit/lit">lit</a></li>
+    <li><a href="https://github.com/preactjs/preact">preact</a></li>
+  </ul>
+
+	<h2>Recent Posts</h2>
 	<ul>
-		{% for post in paginator.posts %}
+		{% for post in site.posts limit:5 %}
 		<li>
-			<h2>
-				{% if post.external %}<a href="{{ post.external }}" target="_blank" title="{{ post.title }}">
-				{% else %}<a href="{{ post.url }}">{% endif %}{{ post.title }}</a>
-			</h2>
+			<a href="{{ post.url }}">{{ post.title }}</a>
 			<span class="meta">{{ post.date | date: "%B %e, %Y" }}</span>
 		</li>
 		{% endfor %}
 	</ul>
-	<div class="pager">
-		{% if paginator.previous_page %}
-			{% if paginator.previous_page == 1 %}
-			<a href="/" class="pager-left"><i class="fa fa-chevron-left"></i> Previous</a>
-			{% else %}
-			<a href="{{ paginator.previous_page_path }}" class="pager-left"><i class="fa fa-chevron-left"></i> Previous</a>
-			{% endif %}
-		{% endif %}
-		{% if paginator.next_page %}
-			<a href="{{ paginator.next_page_path }}" class="pager-right">Next <i class="fa fa-chevron-right"></i></a>
-		{% endif %}
-	</div>
+
+	<p><a href="/blog/">View all posts →</a></p>
 </div>
