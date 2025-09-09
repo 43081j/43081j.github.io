@@ -213,14 +213,31 @@ The [e18e](https://e18e.dev) community is already tackling a lot of this by cont
 
 Through these efforts, there's already a useful [list of replacements](https://e18e.dev/guide/replacements.html) and an [ESLint plugin](https://github.com/es-tooling/eslint-plugin-depend/).
 
-If you're a maintainer, you can do the same by reviewing your dependencies and seeing if they're needed anymore or there are better alternatives.
+## As a maintainer
 
-Briefly:
+If you're maintaining a library, it would be worth reviewing your dependencies to see if:
 
-- Move validation to the data boundary of your app
-- Use native functionality where possible
-- Open issues in libraries you use if you think they can drop dependencies like this (for alternatives or native functionality)
-- Browse around your dependency tree on [npmgraph](https://npmgraph.js.org/), particularly at the deepest layer
+- Any are replaceable by native functionality these days (e.g. `Array.isArray`)
+- Any are replaceable by smaller, more performant alternatives (e.g. `scule` instead of `pascalcase`)
+- Any are redundant if you make more assumptions about input types
+
+Tools like [npmgraph](https://npmgraph.js.org/) can help you visualise your dependency tree to make this task easier.
+
+Also, being stricter around input types will allow you to reduce a lot of code and dependencies.
+
+If you can assume the data being passed in is the correct type, you can leave validation up to the consumer.
+
+## As a user
+
+Keep a close eye on your dependencies (both deep and direct), and what alternatives are available to your direct dependencies.
+
+Often, it is easy to stick with a dependency from long ago and forget to re-visit it one day in case there is a better way. Many of these packages are possible natively, or have more modern alternatives.
+
+Useful tools:
+
+- [npmgraph](https://npmgraph.js.org/) for visualising your dependency tree
+- [node-modules.dev](https://node-modules.dev/) for visualising your dependencies and lots of useful meta data
+- [dependabot](https://docs.github.com/en/code-security/getting-started/dependabot-quickstart-guide) for keeping your dependencies up to date
 
 # Conclusion
 
