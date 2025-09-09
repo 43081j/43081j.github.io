@@ -61,9 +61,6 @@ But hey, let's go further! What if other libraries also want to accept such loos
 import isNumber from 'is-number';
 
 export function clamp(value: number | string, min: number | string, max: number | string): number {
-  if (min > max) {
-    throw new Error('min must be less than or equal to max');
-  }
   if (!isNumber(value)) {
     throw new Error('value must be a number or a number-like string');
   }
@@ -72,6 +69,9 @@ export function clamp(value: number | string, min: number | string, max: number 
   }
   if (!isNumber(max)) {
     throw new Error('max must be a number or a number-like string');
+  }
+  if (Number(min) > Number(max)) {
+    throw new Error('min must be less than or equal to max');
   }
   return Math.min(Math.max(value, min), max);
 }
@@ -91,7 +91,7 @@ export function clamp(value: number, min: number, max: number): number {
 }
 ```
 
-_Maybe_ with some `min < max` validation, but even that is debatable. At this point, you may as well inline the `Math.min(Math.max(...))` expression instead of using a dependency.
+_Maybe_ with some `min <= max` validation, but even that is debatable. At this point, you may as well inline the `Math.min(Math.max(...))` expression instead of using a dependency.
 
 **We should be able to define our functions to accept the inputs they are designed for, and not try to handle every possible edge case.**
 
@@ -100,7 +100,7 @@ There are two things at play here:
 - Data types
 - Values
 
-A well designed library would assume the right **data types** have been passed in, but may validate that the **values** make sense (e.g. `min` is less than `max`).
+A well designed library would assume the right **data types** have been passed in, but may validate that the **values** make sense (e.g. `min` is less than or equal to `max`).
 
 These over-engineered libraries have decided to implement _both_ at runtime - essentially run-time type checking and value validation. One could argue that this is just a result of building in the pre-TypeScript era, but that still doesn't justify the overly specific _value validation_ (e.g. the real `is-number` also checks that it is finite).
 
