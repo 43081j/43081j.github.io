@@ -6,6 +6,8 @@ description: Thoughts on how the ecosystem has suffered from over-engineering of
 
 This is just some of what I've been pondering recently - particularly in terms of how we ended up with such overly-granular dependency trees.
 
+I think we've ended up with many libraries in our ecosystem which are edge-case-first, the opposite to what I'd expect. I'll give a few examples and some thoughts around this, mostly in the hope we can start to trim some of it away.
+
 # The problem
 
 I believe a lot of the questionably small libraries hiding in our deep dependency trees are a result of over-engineering for inputs and edge cases we've probably never seen.
@@ -35,9 +37,6 @@ export function clamp(value: number, min: number, max: number): number {
 
 ```ts
 export function clamp(value: number | string, min: number | string, max: number | string): number {
-  if (min > max) {
-    throw new Error('min must be less than or equal to max');
-  }
   if (typeof value === 'string' && Number.isNaN(Number(value))) {
     throw new Error('value must be a number or a number-like string');
   }
@@ -46,6 +45,9 @@ export function clamp(value: number | string, min: number | string, max: number 
   }
   if (typeof max === 'string' && Number.isNaN(Number(max))) {
     throw new Error('max must be a number or a number-like string');
+  }
+  if (Number(min) > Number(max)) {
+    throw new Error('min must be less than or equal to max');
   }
   return Math.min(Math.max(value, min), max);
 }
@@ -80,6 +82,16 @@ export function clamp(value: number | string, min: number | string, max: number 
 # How it should be
 
 This, in my opinion, is poor technical design we've all ended up dealing with over the years. Carrying the baggage of these overly-granular libraries that exist to handle edge cases we've probably never encountered.
+
+I think it should have been:
+
+```ts
+export function clamp(value: number, min: number, max: number): number {
+  return Math.min(Math.max(value, min), max);
+}
+```
+
+_Maybe_ with some `min < max` validation, but even that is debatable. At this point, you may as well inline the `Math.min(Math.max(...))` expression instead of using a dependency.
 
 **We should be able to define our functions to accept the inputs they are designed for, and not try to handle every possible edge case.**
 
@@ -190,6 +202,24 @@ As per the description:
 
 Let's say this is actually useful to someone, how many of its consumers are stringifying cross-realm values, do you think?
 
+# A good example
+
+All of this is a bit dull, so let's have an example of a good library!
+
+[scule](https://www.npmjs.com/package/scule) is a library for transforming casing of text (e.g. camel case, etc).
+
+A few things it does correctly:
+
+- Zero dependencies
+- Accepts only the inputs it is designed for (strings and arrays of strings. most functions assume this and don't validate it)
+- Has a clear purpose (transforming casing of text)
+
+If we compare that to what the `pascalcase` library (9.7M downloads/week) does:
+
+- 1 dependency (`camelcase`)
+- Accepts strings, null, undefined, arrays of strings, functions, and arbitrary objects with `toString` methods
+- Has a clear purpose (transforming text to PascalCase)
+
 # A note on overly-granular libraries
 
 This post isn't about overly-granular libraries in general, but I'd like to briefly mention them for visibility.
@@ -198,7 +228,7 @@ An overly-granular library is one where someone took a useful library and split 
 
 Some examples:
 
-- `shebag-regex` - 2LOC, does the same as `startsWith('#!')`, **86M downloads/week**
+- `shebang-regex` - 2LOC, does the same as `startsWith('#!')`, **86M downloads/week**
 - `is-whitespace` - 7LOC, checks if a string is only whitespace, **1M downloads/week**
 - `is-npm` - 8LOC, checks `npm_config_user_agent` or `npm_package_json` are set, **7M downloads/week**
 
