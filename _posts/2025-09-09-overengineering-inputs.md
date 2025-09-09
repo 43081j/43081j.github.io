@@ -104,61 +104,54 @@ A well designed library would assume the right **data types** have been passed i
 
 These over-engineered libraries have decided to implement _both_ at runtime - essentially run-time type checking and value validation. One could argue that this is just a result of building in the pre-TypeScript era, but that still doesn't justify the overly specific _value validation_ (e.g. the real `is-number` also checks that it is finite).
 
-# Examples
+# What we shouldn't do
 
-Let's take a look at some examples.
+We shouldn't build edge-case-first libraries, i.e. those which solve for edge cases we have yet to encounter or are unlikely to ever encounter.
 
-Keep in mind, I don't have the entire context of why these libraries introduced the code they have. I am sure the maintainers had their reasons and beliefs at the time, and many didn't have nice things like TypeScript back when they built this stuff.
+## Example: `is-arrayish` (76M downloads/week)
 
-## `is-arrayish` (76M downloads/week)
+The `is-arrayish` library determines if a value is an `Array` or behaves like one.
 
-**What's it do?**
+There will be some edge cases where this matters a lot, where we want to accept something we can index into but don't care if it is a real `Array` or not.
 
-Checks if a value is an `Array` or behaves like one.
+However, the common use case clearly will not be that and we could've just used `Array.isArray()` all along.
 
-**Who uses it?**
+## Example: `is-number` (90M downloads/week)
 
-Almost solely used by `error-ex` - a library for subclassing `Error` (this used to be a PITA before ES6 classes).
+The `is-number` library determines if a value is a positive, finite number or number-like string.
 
-**What's the `git blame` say?**
+Again, there will be edge cases where we want to deal with number-like strings or we want to validate that a number is within a range (e.g. finite).
 
-ref: [bf3ba64](https://github.com/Qix-/node-error-ex/commit/bf3ba642168ae7b20bb63863c1065d97f22e51d2)
+The common use case will not be this. The common use case will be that we want to check `typeof n === 'number'` and be done with it.
 
-It is used so you can mutate the `Error#message` via a function, and return strings or arrays:
+For those edge cases where we want to _additionally_ validate what kind of number it is, we could use a library (but one which exists for the validation, not for the type check).
 
-```ts
-const originalErr = new Error('foo');
+## Example: `pascalcase` (9.7M downloads/week)
 
-const TestError = errorEx('TestError', {
-  foo: {
-    message: (message: string) => {
-      return 'foobar'; // Internally checks that this is an array, and adds it to one if it is not
-    }
-  }
-});
-```
+The `pascalcase` library transforms text to PascalCase.
 
-## `is-number` (90M downloads/week)
+It has 1 dependency (`camelcase`) and accepts a variety of input types:
 
-**What's it do?**
+- strings
+- null
+- undefined
+- arrays of strings
+- functions
+- arbitrary objects with `toString` methods
 
-Checks if a value is a positive, finite number or number-like string.
+In reality, almost every user will be passing a `string` and this library is actually propping up consumers who themselves should have validated their own data earlier up the chain.
 
-**Who uses it?**
+# What we should do
 
-Almost solely used by `to-regex-range` - a library for generating numeric regex ranges.
+We should build libraries which solve the common use case and make assumptions about the input types they will be given.
 
-**What's the `git blame` say?**
+## Example: scule (1.8M downloads/week)
 
-Introduced in the initial implementation, it is used to validate that the inputs:
+[scule](https://www.npmjs.com/package/scule) is a library for transforming casing of text (e.g. camel case, etc).
 
-```ts
-// toRegexRange(min, max)
+It only accepts inputs it is designed for (strings and arrays of strings) and has zero dependencies.
 
-toRegexRange(-10, 10); // throws
-toRegexRange('not-a-number', 10); // throws
-toRegexRange(0, Infinity); // throws
-```
+In most of the functions it exports, it will assume the input is valid and will not validate it.
 
 # A note on cross-realm `is-*` libraries
 
@@ -201,24 +194,6 @@ As per the description:
 > Stringify an object/array like JSON.stringify just without all the double-quotes
 
 Let's say this is actually useful to someone, how many of its consumers are stringifying cross-realm values, do you think?
-
-# A good example
-
-All of this is a bit dull, so let's have an example of a good library!
-
-[scule](https://www.npmjs.com/package/scule) is a library for transforming casing of text (e.g. camel case, etc).
-
-A few things it does correctly:
-
-- Zero dependencies
-- Accepts only the inputs it is designed for (strings and arrays of strings. most functions assume this and don't validate it)
-- Has a clear purpose (transforming casing of text)
-
-If we compare that to what the `pascalcase` library (9.7M downloads/week) does:
-
-- 1 dependency (`camelcase`)
-- Accepts strings, null, undefined, arrays of strings, functions, and arbitrary objects with `toString` methods
-- Has a clear purpose (transforming text to PascalCase)
 
 # A note on overly-granular libraries
 
