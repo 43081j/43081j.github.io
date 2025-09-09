@@ -139,25 +139,15 @@ It has 1 dependency (`camelcase`) and accepts a variety of input types:
 - functions
 - arbitrary objects with `toString` methods
 
-In reality, almost every user will be passing a `string` and this library is actually propping up consumers who themselves should have validated their own data earlier up the chain.
+In reality, almost every user will be passing a `string`.
 
-# What we should do
+## Example: `is-regexp` (10M downloads/week)
 
-We should build libraries which solve the common use case and make assumptions about the input types they will be given.
+The `is-regexp` library checks if a value is a `RegExp` object, and supports cross-realm values.
 
-## Example: scule (1.8M downloads/week)
+In reality, almost every user will be passing a `RegExp` object, and not one from another realm.
 
-[scule](https://www.npmjs.com/package/scule) is a library for transforming casing of text (e.g. camel case, etc).
-
-It only accepts inputs it is designed for (strings and arrays of strings) and has zero dependencies.
-
-In most of the functions it exports, it will assume the input is valid and will not validate it.
-
-# A note on cross-realm `is-*` libraries
-
-Some libraries such as `is-regex` exist to do what the platform can already do itself _but cross realm_.
-
-In the case of `is-regex`, this means you can do something like:
+For context, cross-realm values can happen when you retrieve a value from an `iframe` or VM for example:
 
 ```ts
 const iframe = document.createElement('iframe');
@@ -169,31 +159,33 @@ iframeRegex instanceof RegExp; // false
 isRegex(iframeRegex); // true
 ```
 
-A whole raft of libraries exist for this. Some examples:
+This is indeed useful, and I do support this myself in chai (which I maintain). However, this is an edge case most libraries don't need to care about.
 
-- is-string
-- is-set
-- is-map
-- is-date-object
-- is-regex
-- is-regexp
-- etc...
+# What we should do
 
-These are all solving a real problem, but a specific one most of us don't need to care about.
+We should build libraries which solve the common use case and make assumptions about the input types they will be given.
 
-For example, we have similar code inside `chai` to make it possible to assert across realms (e.g. if you got a value from an iframe or a node VM).
+## Example: scule (1.8M downloads/week)
 
-**I would argue that these libraries have made it into the hot path and shouldn't have.**
+[scule](https://www.npmjs.com/package/scule) is a library for transforming casing of text (e.g. camel case, etc).
 
-## Example: `is-regexp` (10M downloads/week)
+It only accepts inputs it is designed for (strings and arrays of strings) and has zero dependencies.
 
-The `is-regexp` library gains almost all of its downloads via [`stringify-object`](https://www.npmjs.com/package/stringify-object) (8.7M downloads/week).
+In most of the functions it exports, it assumes valid input data types.
 
-As per the description:
+## Example: dlv (14.9M downloads/week)
 
-> Stringify an object/array like JSON.stringify just without all the double-quotes
+[dlv](https://www.npmjs.com/package/dlv) is a library for deep property access.
 
-Let's say this is actually useful to someone, how many of its consumers are stringifying cross-realm values, do you think?
+It only accepts strings and arrays of strings as the path to access, and assumes this (i.e. does no validation).
+
+# Shifting the validation burden
+
+Deep dependencies applying validation like this actually shifts the burden from where it belongs (at data boundaries) to deep in the dependency tree.
+
+Often at this point, it is invisible to the consumer of the library.
+
+How many people are passing values into `is-number` (via other libraries), not realising it will prevent them from using negative numbers and `Infinity`?
 
 # A note on overly-granular libraries
 
