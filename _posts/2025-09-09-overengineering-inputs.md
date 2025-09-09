@@ -22,7 +22,7 @@ export function clamp(value: number, min: number, max: number): number {
 
 Pretty simple!
 
-Though, what if someone passes nonsensical ranges? Let's add some validation:
+What if someone passes nonsensical ranges? Let's handle that.
 
 ```ts
 export function clamp(value: number, min: number, max: number): number {
@@ -238,6 +238,8 @@ Useful tools:
 - [npmgraph](https://npmgraph.js.org/) for visualising your dependency tree
 - [node-modules.dev](https://node-modules.dev/) for visualising your dependencies and lots of useful meta data
 - [dependabot](https://docs.github.com/en/code-security/getting-started/dependabot-quickstart-guide) for keeping your dependencies up to date
+
+On the topic of data, it is also worth ensuring validation happens at data boundaries rather than being delegated to various dependencies. Try to validate the type and value up front, before passing into dependencies.
 
 # Conclusion
 
