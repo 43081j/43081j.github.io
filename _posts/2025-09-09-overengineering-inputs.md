@@ -179,7 +179,11 @@ In most of the functions it exports, it assumes valid input data types.
 
 It only accepts strings and arrays of strings as the path to access, and assumes this (i.e. does no validation).
 
-# Shifting the validation burden
+# Validation is important
+
+Validation is important, and I want to be clear that I'm not saying we should stop validating our data.
+
+However, we should usually be validating the data in the project that owns it (e.g. at the app level), and not in every library that later consumes it as input.
 
 Deep dependencies applying validation like this actually shifts the burden from where it belongs (at data boundaries) to deep in the dependency tree.
 
