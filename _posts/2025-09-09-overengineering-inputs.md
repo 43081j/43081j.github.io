@@ -118,7 +118,7 @@ However, the common use case clearly will not be that and we could've just used 
 
 ## Example: `is-number` (90M downloads/week)
 
-The `is-number` library determines if a value is a positive, finite number or number-like string.
+The `is-number` library determines if a value is a positive, finite number or number-like string (maybe we should name it `is-positive-finite-number` to be more accurate).
 
 Again, there will be edge cases where we want to deal with number-like strings or we want to validate that a number is within a range (e.g. finite).
 
