@@ -185,7 +185,7 @@ Validation is important, and I want to be clear that I'm not saying we should st
 
 However, we should usually be validating the data in the project that owns it (e.g. at the app level), and not in every library that later consumes it as input.
 
-Deep dependencies applying validation like this actually shifts the burden from where it belongs (at data boundaries) to deep in the dependency tree.
+Deep dependencies applying validation like this actually shift the burden from where it belongs (at data boundaries) to deep in the dependency tree.
 
 Often at this point, it is invisible to the consumer of the library.
 
