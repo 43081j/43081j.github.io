@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Over-engineering inputs
-description: Thoughts on how the ecosystem has suffered from over-engineering of input validation and edge case
+title: The bloat of edge-case first libraries
+description: How building edge-case first led to bloated, overly-granular libraries and what we can do about it
 ---
 
 This is just some of what I've been pondering recently - particularly in terms of how we ended up with such overly-granular dependency trees.
@@ -12,7 +12,7 @@ I think we've ended up with many libraries in our ecosystem which are edge-case-
 
 I believe a lot of the questionably small libraries hiding in our deep dependency trees are a result of over-engineering for inputs and edge cases we've probably never seen.
 
-For example, let's say we want to build a `clamp` library:
+For example, say we're building a `clamp` function:
 
 ```ts
 export function clamp(value: number, min: number, max: number): number {
@@ -206,6 +206,21 @@ Some examples:
 This is a personal preference some maintainers clearly prefer. The thought seems to be that by having atomic libraries, you can easily build your next library mostly from the existing building blocks you have.
 
 I don't really agree with this and think downloading a package for `#!` 86 million times a week is a bit much.
+
+# What can be done about this?
+
+The [e18e](https://e18e.dev) community is already tackling a lot of this by contributing performance improvements across the ecosystem, including removing and replacing dependencies with more modern, performant ones.
+
+Through these efforts, there's already a useful [list of replacements](https://e18e.dev/guide/replacements.html) and an [ESLint plugin](https://github.com/es-tooling/eslint-plugin-depend/).
+
+If you're a maintainer, you can do the same by reviewing your dependencies and seeing if they're needed anymore or there are better alternatives.
+
+Briefly:
+
+- Move validation to the data boundary of your app
+- Use native functionality where possible
+- Open issues in libraries you use if you think they can drop dependencies like this (for alternatives or native functionality)
+- Browse around your dependency tree on [npmgraph](https://npmgraph.js.org/), particularly at the deepest layer
 
 # Conclusion
 
