@@ -218,7 +218,7 @@ Through these efforts, there's already a useful [list of replacements](https://e
 If you're maintaining a library, it would be worth reviewing your dependencies to see if:
 
 - Any are replaceable by native functionality these days (e.g. `Array.isArray`)
-- Any are replaceable by smaller, more performant alternatives (e.g. `scule` instead of `pascalcase`)
+- Any are replaceable by smaller, less granular and/or more performant alternatives (e.g. `scule` instead of `pascalcase`)
 - Any are redundant if you make more assumptions about input types
 
 Tools like [npmgraph](https://npmgraph.js.org/) can help you visualise your dependency tree to make this task easier.
