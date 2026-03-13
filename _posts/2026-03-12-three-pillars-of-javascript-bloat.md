@@ -111,7 +111,7 @@ However, this obviously isn't how things turned out. Things look more like this:
 
 So, in the end these packages are not the reusable building blocks they aimed to be. They are single-use, deep dependencies nobody else uses.
 
-This means they're equivalent of inline code but cost us more to acquire (npm requests, bandwidth, etc.).
+This means they're equivalent of inline code but cost us more to acquire (npm requests, tar extraction, bandwidth, etc.).
 
 # 3. Redundant Ponyfills & Polyfills
 
