@@ -60,7 +60,7 @@ We have this exact issue in chai, and use `toString` for that reason: `Object.pr
 
 In the graph above, `is-string` is basically doing this same job in case we passed a `new String(val)` from one realm to another.
 
-## Where this went wrong...
+## Why this is a problem
 
 For a small amount of people in the real world, all of this makes sense. If you need the following:
 
@@ -91,31 +91,52 @@ const shebangRegex = /^#!(.*)/;
 export default shebangRegex;
 ```
 
-Another couple of examples of these blocks:
+By splitting code up to this atomic level, the theory is that we can then create higher level packages simply by joining the dots.
+
+Some examples of these atomic packages to give you an idea of the granularity:
 
 - `arrify` - Converts a value to an array
 - `slash` - Replace backslashes in a file-system path with `/`
 - `cli-boxes` - A JSON file containing the edges of a box
+- `path-key` - Get the `PATH` environment variable key for the current platform (`PATH` on Unix, `Path` on Windows)
+- `onetime` - Ensure a function is only called once
+- `is-wsl` - Detect if we're running in the Windows Subsystem for Linux
+- `is-windows` - Detect if we're running on Windows
+- `is-docker` - Detect if we're running in a Docker container
 
-## Where this went wrong...
+If we wanted to build a new CLI for example, we could pull a few of these in and not worry about implementation. We don't need to do `env['PATH'] || env['Path']` ourselves, we can just pull a package for that.
 
-In a world where every maintainer is on the same page, using the same packages and the same constraints - this dream of "everything can be made from building blocks" may make some sense.
+## Why this is a problem
 
-It is basically an attempt at a standard library but in userland.
+It does sound kind of nice to have a library of reusable building blocks every maintainer shares... but that isn't reality. In reality, we end up with a bunch of single-use packages or a bunch of duplicated packages across various versions.
 
-However, this obviously isn't how things turned out. Things look more like this:
+For example, let's take a look at some of the most granular packages:
 
 - `shebang-regex` is used almost solely by `shebang-command` by the same maintainer
 - `cli-boxes` is used almost solely by `boxen` and `ink` by the same maintainer
 - `arrify` is used almost solely by `minimist`
 
-So, in the end these packages are not the reusable building blocks they aimed to be. They are single-use, deep dependencies nobody else uses.
+In the end these packages are not the reusable building blocks they aimed to be. They are single-use, deep dependencies nobody else uses.
 
 This means they're equivalent of inline code but cost us more to acquire (npm requests, tar extraction, bandwidth, etc.).
 
-# 3. Redundant Ponyfills & Polyfills
+Similar to the first pillar, this philosophy made its way into the "hot path" and shouldn't have. Again, we all pay the cost to no benefit.
 
-Foo
+# 3. "Ponyfills" that overstayed their welcome
+
+If you're building an app, you might want to use some "future" features your chosen engine doens't support yet. In this situation, a **polyfill** can come in handy - it provides a fallback implementation where the feature should be, so you can use it as if it were natively supported.
+
+There are considerations to make there such as ensuring the spec is finalised, the polyfill is well written, etc. Though those are outside the scope of this post.
+
+Now, if you're building a library instead, what should you do?
+
+No library should load a polyfill as that is a consumer's concern and a library shouldn't be mutating the global environment. As an alternative, some maintainers choose to use what's called a **ponyfill** (sticking to the unicorns, sparkles and rainbows theme).
+
+A ponyfill is basically a polyfill you import rather than one which mutates the environment.
+
+This kinda works since it means a library can use future tech by importing an implementation of it which passes through to the native one if it exists, and uses the fallback otherwise.
+
+## Why this is a problem
 
 # Thoughts
 
