@@ -16,25 +16,26 @@ The graph above is a common sight in many npm dependency trees - a small utility
 
 So why is this a thing? Why do we need `is-string` instead of `typeof` checks? Why do we need `hasown` instead of `Object.hasOwn` (or `Object.prototype.hasOwnProperty`)? Three things:
 
-1. Support for very old versions of Node.js
+1. Support for very old engines
 2. Protection against global namespace mutation
 3. Cross-realm values
 
-## Support for old versions of Node.js
+## Support for very old engines
 
-Somewhere in the world, some people apparently exist who need to support **Node 0.8** (left long term support in 2017).
+Somewhere in the world, some people apparently exist who need to support **ES3** - think IE6/7, or extremely early versions of Node.js.
 
 For these people, much of what we take for granted today does not exist. For example, they don't have any of the following:
 
-- `Array.prototype.slice` (0.10)
-- `Object.defineProperty` (0.10)
-- `Symbol` (0.12)
+- `Array.prototype.forEach`
+- `Array.prototype.reduce`
+- `Object.keys`
+- `Object.defineProperty`
 
-Basically, much of modern JavasScript (both syntax and APIs) became available in `>=0.10` of Node it seems.
+These are all ES5 features, meaning they simply don't exist in ES3 engines.
 
-For these unfortunate souls who are still running `0.8` and don't have any this functionality, they need to reimplement everything themselves, or be provided with polyfills.
+For these unfortunate souls who are still running old engines, they need to reimplement everything themselves, or be provided with polyfills.
 
-Alternatively, what'd be really nice is if they upgraded their version of Node.
+Alternatively, what'd be really nice is if they upgraded.
 
 ## Protection against global namespace mutation
 
@@ -56,25 +57,17 @@ Lastly, we have cross-realm values. These are basically values you have passed f
 
 In this situation, a `new RegExp(pattern)` in an iframe, is _not_ the same `RegExp` class as the one in the parent page. This means `window.RegExp !== iframeWindow.RegExp`, which of course means `val instanceof RegExp` would be `false` if it came from the iframe (another realm).
 
-We have this exact issue in chai, and use `toString` for that reason: `Object.prototype.toString.call(val) === '[object RegExp]'`.
+For example, I am a maintainer of chai, and we have this exact issue. We need to support assertions happening across realms (since a test runner may run tests in a VM or iframe), so we can't rely on `instanceof` checks. For that reason, we use `Object.prototype.toString.call(val) === '[object RegExp]'` to check if something is a regex, which works across realms since it doesn't rely on the constructor.
 
 In the graph above, `is-string` is basically doing this same job in case we passed a `new String(val)` from one realm to another.
 
 ## Why this is a problem
 
-For a small amount of people in the real world, all of this makes sense. If you need the following:
+All of this makes sense for a very small group of people. If you're supporting very old engines, passing values across realms, or want protection from someone mutating the environment - these packages are exactly what you need.
 
-- Node 0.8 support (or lower)
-- Cross-realm support
-- Safe from someone mutating the environment
+The problem is that the vast majority of us don't need any of this. We're running a version of Node from the last 10 years, or using an evergreen browser. We don't need to support pre-ES5 environments, we don't pass values across frames, and we uninstall packages which break the environment.
 
-Then this is all good and exactly what you need!
-
-However, this obviously isn't what the majority of us need.
-
-Most of us are running a version of Node from the last 10 years, or an evergreen browser. We don't need to support 0.8, we don't pass values across frames, and we uninstall packages which trash the global namespace.
-
-These layers of compatibility and support somehow made their way into the "hot path" of consumers. The tiny amount of people who need this stuff should be the ones installing special packages for that purpose, while the average user should not. Currently, this is reversed and **we all pay the cost**.
+These layers of niche compatibility somehow made their way into the "hot path" of everyday packages. The tiny group of people who actually need this stuff should be the ones seeking out special packages for it. Instead, it is reversed and **we all pay the cost**.
 
 # 2. Atomic architecture
 
@@ -124,20 +117,56 @@ Similar to the first pillar, this philosophy made its way into the "hot path" an
 
 # 3. "Ponyfills" that overstayed their welcome
 
-If you're building an app, you might want to use some "future" features your chosen engine doens't support yet. In this situation, a **polyfill** can come in handy - it provides a fallback implementation where the feature should be, so you can use it as if it were natively supported.
+![eslint-plugin-react polyfills](/assets/images/eslint-plugin-react-polyfills.svg){: .img-small}
 
-There are considerations to make there such as ensuring the spec is finalised, the polyfill is well written, etc. Though those are outside the scope of this post.
+If you're building an app, you might want to use some "future" features your chosen engine doesn't support yet. In this situation, a **polyfill** can come in handy - it provides a fallback implementation where the feature should be, so you can use it as if it were natively supported.
+
+For example, [temporal-polyfill](https://npmx.dev/package/temporal-polyfill) polyfills the new Temporal API so we can use `Temporal` regardless of if the engine supports it or not.
 
 Now, if you're building a library instead, what should you do?
 
-No library should load a polyfill as that is a consumer's concern and a library shouldn't be mutating the global environment. As an alternative, some maintainers choose to use what's called a **ponyfill** (sticking to the unicorns, sparkles and rainbows theme).
+In general, no library should load a polyfill as that is a consumer's concern and a library shouldn't be mutating the environment around it. As an alternative, some maintainers choose to use what's called a **ponyfill** (sticking to the unicorns, sparkles and rainbows theme).
 
 A ponyfill is basically a polyfill you import rather than one which mutates the environment.
 
-This kinda works since it means a library can use future tech by importing an implementation of it which passes through to the native one if it exists, and uses the fallback otherwise.
+This kinda works since it means a library can use future tech by importing an implementation of it which passes through to the native one if it exists, and uses the fallback otherwise. None of this mutates the environment, so it is safe for libraries to use.
+
+For example, fastly provides [@fastly/performance-observer-polyfill](https://github.com/fastly/performance-observer-polyfill?tab=readme-ov-file#usage-as-a-ponyfill), which contains both a polyfill and ponyfill for `PerformanceObserver`.
 
 ## Why this is a problem
 
-# Thoughts
+These ponyfills did their job at the time - they allowed the library author to use future tech without mutating the environment and without forcing the consumer to know which polyfills to install.
 
-Foo
+The problem comes when these ponyfills outstay their welcome. When the feature they fill in for is now supported by all engines we care about, the ponyfill should be removed. However, this often doesn't happen and the ponyfill remains in place long after it's needed.
+
+We're now left with many, many packages which rely on ponyfills for features we've all had for a decade now.
+
+For example:
+
+- `globalthis` - ponyfill for `globalThis` (widely supported in 2019, 49M downloads a week)
+- `indexof` - ponyfill for `Array.prototype.indexOf` (widely supported in 2010, 2.3M downloads a week)
+- `object.entries` - ponyfill for `Object.entries` (widely supported in 2017, 35M downloads a week)
+
+Unless these packages are being kept alive because of _Pillar 1_, they're usually still used just because nobody ever thought to remove them.
+
+When all long-term support versions of engines have the feature, the ponyfill should be removed.
+
+# Closing Thoughts
+
+We all pay the cost for an incredibly small group of people to have an unusual architecture they like, or a level of backwards compatibility they need.
+
+This isn't necessarily a fault of the people who made these packages, as each person should be able to build however they want. Many of them are an older generation of influential JavaScript developers - building packages in a darker time where many of the nice APIs and cross-compatibility we have today didn't exist. They built the way they did because it was the possibly best way at the time.
+
+The problem is that we never moved on from that. We still download all of this fluff today even though we've had these features for several years.
+
+I think we can solve this by reversing things. This small group should pay the cost - they should have their own special stack pretty much only they use. Everyone else gets the modern, lightweight, and widely supported code.
+
+Hopefully things like [e18e](https://e18e.dev) and [npmx](https://npmx.dev) can help with that through documentation, tooling, etc. You can also help by taking a closer look at your dependencies and asking "why?". Raise issues with your dependencies asking them if, and why they need these packages anymore.
+
+We can fix it.
+
+## Disclaimers / Notes
+
+- Most mentioned years of support are from MDN, or if it pre-dates MDN, from the compat data
+- Most of this bloat is from a time when it was probably necessary since the platform obviously wasn't as feature-rich back then. I think it was probably the right decision/architecture at the time.
+- "Ponyfill" stuff in general is an unsettled topic, really. I think we should drop them once LTS is achieved, but others do disagree and want them "forever".
