@@ -4,7 +4,9 @@ title: The Three Pillars of JavaScript Bloat
 description: A brief look at the three main causes of bloat in our JavaScript dependency trees, and how we can start to address them.
 ---
 
-Over the last couple of years, we've seen great growth of the [e18e](https://e18e.dev) community and initiative to improve performance throughout the JavaScript ecosystem. One of the most common topics that comes up is "dependency bloat" - the idea that npm dependency trees are getting larger over time, often with long since redundant code which the platform now provides natively.
+Over the last couple of years, we've seen significant growth of the [e18e](https://e18e.dev) community and a rise in performance focused contributions because of it. A large part of this is the "cleanup" initiative, where the community has been pruning packages which are redundant, outdated, or unmaintained.
+
+One of the most common topics that comes up as part of this is "dependency bloat" - the idea that npm dependency trees are getting larger over time, often with long since redundant code which the platform now provides natively.
 
 In this post, I want to briefly look at what I think are the three main types of bloat in our dependency trees, why they exist, and how we can start to address them.
 
@@ -151,11 +153,15 @@ Unless these packages are being kept alive because of _Pillar 1_, they're usuall
 
 When all long-term support versions of engines have the feature, the ponyfill should be removed.
 
+# What can we do about it?
+
+TODO
+
 # Closing Thoughts
 
 We all pay the cost for an incredibly small group of people to have an unusual architecture they like, or a level of backwards compatibility they need.
 
-This isn't necessarily a fault of the people who made these packages, as each person should be able to build however they want. Many of them are an older generation of influential JavaScript developers - building packages in a darker time where many of the nice APIs and cross-compatibility we have today didn't exist. They built the way they did because it was the possibly best way at the time.
+This isn't necessarily a fault of the people who made these packages, as each person should be able to build however they want. Many of them are an older generation of influential JavaScript developers - building packages in a darker time where many of the nice APIs and cross-compatibility we have today didn't exist. They built the way they did because it was possibly the best way at the time.
 
 The problem is that we never moved on from that. We still download all of this fluff today even though we've had these features for several years.
 
