@@ -116,7 +116,7 @@ Each of these having only one consumer means they're equivalent of inline code b
 
 ### Duplication
 
-Taking a look at [nuxt's dependency tree](https://npmgraph.js.org/?q=nuxt), we can see a few of these building blocks duplicated:
+Taking a look at [nuxt's dependency tree](https://npmgraph.js.org/?q=nuxt@4.4.2), we can see a few of these building blocks duplicated:
 
 - `is-docker` (2 versions)
 - `is-stream` (2 versions)
