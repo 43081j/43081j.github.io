@@ -90,32 +90,55 @@ By splitting code up to this atomic level, the theory is that we can then create
 
 Some examples of these atomic packages to give you an idea of the granularity:
 
-- `arrify` - Converts a value to an array
+- `arrify` - Converts a value to an array (`Array.isArray(val) ? val : [val]`)
 - `slash` - Replace backslashes in a file-system path with `/`
 - `cli-boxes` - A JSON file containing the edges of a box
 - `path-key` - Get the `PATH` environment variable key for the current platform (`PATH` on Unix, `Path` on Windows)
 - `onetime` - Ensure a function is only called once
-- `is-wsl` - Detect if we're running in the Windows Subsystem for Linux
-- `is-windows` - Detect if we're running on Windows
-- `is-docker` - Detect if we're running in a Docker container
+- `is-wsl` - Check if `process.platform` is `linux` and `os.release()` contains `microsoft`
+- `is-windows` - Check if `process.platform` is `win32`
 
 If we wanted to build a new CLI for example, we could pull a few of these in and not worry about implementation. We don't need to do `env['PATH'] || env['Path']` ourselves, we can just pull a package for that.
 
 ## Why this is a problem
 
-It does sound kind of nice to have a library of reusable building blocks every maintainer shares... but that isn't reality. In reality, we end up with a bunch of single-use packages or a bunch of duplicated packages across various versions.
+In reality, most or all of these packages did not end up as the reusable building blocks they were meant to be. They're either largely duplicated across various versions in a wider tree, or they're single-use packages which only one other package uses.
 
-For example, let's take a look at some of the most granular packages:
+### Single use packages
+
+Let's take a look at some of the most granular packages:
 
 - `shebang-regex` is used almost solely by `shebang-command` by the same maintainer
 - `cli-boxes` is used almost solely by `boxen` and `ink` by the same maintainer
-- `arrify` is used almost solely by `minimist`
+- `onetime` is used almost solely by `restore-cursor` by the same maintainer
 
-In the end these packages are not the reusable building blocks they aimed to be. They are single-use, deep dependencies nobody else uses.
+Each of these having only one consumer means they're equivalent of inline code but cost us more to acquire (npm requests, tar extraction, bandwidth, etc.).
 
-This means they're equivalent of inline code but cost us more to acquire (npm requests, tar extraction, bandwidth, etc.).
+### Duplication
 
-Similar to the first pillar, this philosophy made its way into the "hot path" and shouldn't have. Again, we all pay the cost to no benefit.
+Taking a look at [nuxt's dependency tree](https://npmgraph.js.org/?q=nuxt), we can see a few of these building blocks duplicated:
+
+- `is-docker` (2 versions)
+- `is-stream` (2 versions)
+- `is-wsl` (2 versions)
+- `isexe` (2 versions)
+- `npm-run-path` (2 versions)
+- `path-key` (2 versions)
+- `path-scurry` (2 versions)
+
+Inlining them doesn't mean we no longer duplicate the code, but it does mean we don't pay the cost of things like version resolution, conflicts, cost of acquisition, etc.
+
+Inlining makes duplication almost free, while packaging makes it expensive.
+
+### Larger supply chain surface area
+
+The more packages we have, the larger our supply chain surface area is. Every package is a potential point of failure for maintenance, security, and so on.
+
+For example, a maintainer of many of these packages was compromised last year. This meant hundreds of tiny building blocks were compromised, which meant the higher level packages we actually install were also compromised.
+
+Logic as simple as `Array.isArray(val) ? val : [val]` probably doesn't need its own package, security, maintenance, and so on. It can just be inlined and we can avoid the risk of it being compromised.
+
+Similar to the first pillar, this philosophy made its way into the "hot path" and probably shouldn't have. Again, we all pay the cost to no real benefit.
 
 # 3. "Ponyfills" that overstayed their welcome
 
