@@ -178,7 +178,72 @@ When all long-term support versions of engines have the feature, the ponyfill sh
 
 # What can we do about it?
 
-TODO
+Much of this bloat is so deeply nested in dependency trees today that it is a fairly hefty task to unravel it all and get to a good place. It will take time, and it will take a lot of effort from maintainers and consumers.
+
+Having said that, I do think we can make significant progress on this front if we all work together.
+
+Start asking yourself, "why do I have this package?" and "do I really need it?".
+
+If you find something which seems redundant, raise an issue with the maintainer asking if it can be removed.
+
+If you encounter a direct dependency which has many of these issues, have a look for an alternative which doesn't. For example, most modern projects have moved away from `execa` to `tinyexec` which achieves the same thing without the bloat at a fraction of the size.
+
+## Using knip to remove unused dependencies
+
+[knip](https://knip.dev) is a great project which can help you find and remove unused dependencies, dead code, and much more. In this case, it can be a great tool to help you find and remove dependencies you no longer use.
+
+This doesn't solve the problems above necessarily, but is a great starting point to help clean up the dependency tree before doing more involved work.
+
+You can read more about how knip deals with unused dependencies in their [documentation](https://knip.dev/typescript/unused-dependencies).
+
+## Using the e18e CLI to detect replaceable dependencies
+
+The [e18e CLI](https://github.com/e18e/cli) has a super useful `analyze` mode to determine which dependencies are no longer needed, or have community recommended replacements.
+
+For example, if you get something like this:
+
+```sh
+$ npx @e18e/cli analyze
+
+...
+
+│  Warnings:
+│    • Module "chalk" can be replaced with native functionality. You can read more at
+│      https://nodejs.org/docs/latest/api/util.html#utilstyletextformat-text-options. See more at
+│      https://github.com/es-tooling/module-replacements/blob/main/docs/modules/chalk.md.
+
+...
+```
+
+Using this, we can quickly identify which direct dependencies can be cleaned up. We can also then use the `migrate` command to automatically migrate some of these dependencies:
+
+```sh
+$ npx @e18e/cli migrate --all
+
+e18e (cli v0.0.1)
+
+┌  Migrating packages...
+│
+│  Targets: chalk
+│
+◆  /code/main.js (1 migrated)
+│
+└  Migration complete - 1 files migrated.
+```
+
+In this case, it will migrate from `chalk` to `picocolors`, a much smaller package which provides the same functionality.
+
+In the future, this CLI will even recommend based on your environment - for example, it could suggest the native `styleText` instead of a colours library if you're running a new enough Node.
+
+## Using npmgraph to investigate your dependency tree
+
+[npmgraph](https://npmgraph.js.org) is a great tool to visualize your dependency tree and investigate where bloat is coming from.
+
+For example, let's take a look at the bottom half of [ESLint's dependency graph](https://npmgraph.js.org/?q=eslint) as of writing this post:
+
+![eslint dependency graph](/assets/images/eslint-graph.png){: .img-small}
+
+We can see in this graph that the `find-up` branch is isolated, in that nothing else uses its deep dependencies. For something as simple as an upwards file-system traversal, maybe we don't need 6 packages. We can then go look for an alternative, such as [`empathic`](https://npmx.dev/package/empathic) which has a much smaller [dependency graph](https://npmgraph.js.org/?q=empathic) and achieves the same thing.
 
 # Closing Thoughts
 
