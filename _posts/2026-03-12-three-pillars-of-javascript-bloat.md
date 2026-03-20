@@ -47,7 +47,7 @@ Basically, inside Node itself, there is a concept of "primordials". These are es
 
 For example, if Node itself uses `Map` and we re-define what `Map` is - we can break Node. To avoid this, Node keeps a reference to the original `Map` which it imports rather than accessing the global.
 
-You can read more about this [here in the Node repo](https://github.com/nodejs/node/blob/main/doc/contributing/primordials.md).
+You can read more about this [here in the Node repo](https://github.com/nodejs/node/blob/7547e795ef700e1808702fc2851a0dcc3395a065/doc/contributing/primordials.md).
 
 This makes a lot of sense _for an engine_, since it really shouldn't fall over if a script messes up the global namespace.
 
@@ -156,7 +156,7 @@ A ponyfill is basically a polyfill you import rather than one which mutates the 
 
 This kinda works since it means a library can use future tech by importing an implementation of it which passes through to the native one if it exists, and uses the fallback otherwise. None of this mutates the environment, so it is safe for libraries to use.
 
-For example, fastly provides [@fastly/performance-observer-polyfill](https://github.com/fastly/performance-observer-polyfill?tab=readme-ov-file#usage-as-a-ponyfill), which contains both a polyfill and ponyfill for `PerformanceObserver`.
+For example, fastly provides [@fastly/performance-observer-polyfill](https://github.com/fastly/performance-observer-polyfill/tree/455bd5eb62c1e07af3309e4c212f73c414e2a7d8?tab=readme-ov-file#usage-as-a-ponyfill), which contains both a polyfill and ponyfill for `PerformanceObserver`.
 
 ## Why this is a problem
 
@@ -233,17 +233,17 @@ e18e (cli v0.0.1)
 
 In this case, it will migrate from `chalk` to `picocolors`, a much smaller package which provides the same functionality.
 
-In the future, this CLI will even recommend based on your environment - for example, it could suggest the native `styleText` instead of a colours library if you're running a new enough Node.
+In the future, this CLI will even recommend based on your environment - for example, it could suggest the native [`styleText`](https://nodejs.org/docs/latest-v22.x/api/util.html#utilstyletextformat-text-options) instead of a colours library if you're running a new enough Node.
 
 ## Using npmgraph to investigate your dependency tree
 
 [npmgraph](https://npmgraph.js.org) is a great tool to visualize your dependency tree and investigate where bloat is coming from.
 
-For example, let's take a look at the bottom half of [ESLint's dependency graph](https://npmgraph.js.org/?q=eslint) as of writing this post:
+For example, let's take a look at the bottom half of [ESLint's dependency graph](https://npmgraph.js.org/?q=eslint@10.1.0) as of writing this post:
 
 ![eslint dependency graph](/assets/images/eslint-graph.png){: .img-small}
 
-We can see in this graph that the `find-up` branch is isolated, in that nothing else uses its deep dependencies. For something as simple as an upwards file-system traversal, maybe we don't need 6 packages. We can then go look for an alternative, such as [`empathic`](https://npmx.dev/package/empathic) which has a much smaller [dependency graph](https://npmgraph.js.org/?q=empathic) and achieves the same thing.
+We can see in this graph that the `find-up` branch is isolated, in that nothing else uses its deep dependencies. For something as simple as an upwards file-system traversal, maybe we don't need 6 packages. We can then go look for an alternative, such as [`empathic`](https://npmx.dev/package/empathic) which has a much smaller [dependency graph](https://npmgraph.js.org/?q=empathic@2.0.0) and achieves the same thing.
 
 # Closing Thoughts
 
