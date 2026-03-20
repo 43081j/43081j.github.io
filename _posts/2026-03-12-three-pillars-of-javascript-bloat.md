@@ -24,7 +24,7 @@ So why is this a thing? Why do we need `is-string` instead of `typeof` checks? W
 
 ## Support for very old engines
 
-Somewhere in the world, some people apparently exist who need to support **ES3** - think IE6/7, or extremely early versions of Node.js.
+Somewhere in the world, some people apparently exist who need to support **ES3** - think IE6/7, or extremely early versions of Node.js.[^4]
 
 For these people, much of what we take for granted today does not exist. For example, they don't have any of the following:
 
@@ -67,7 +67,7 @@ In the graph above, `is-string` is basically doing this same job in case we pass
 
 All of this makes sense for a very small group of people. If you're supporting very old engines, passing values across realms, or want protection from someone mutating the environment - these packages are exactly what you need.
 
-The problem is that the vast majority of us don't need any of this. We're running a version of Node from the last 10 years, or using an evergreen browser. We don't need to support pre-ES5 environments, we don't pass values across frames, and we uninstall packages which break the environment.
+The problem is that the vast majority of us don't need any of this. We're running a version of Node from the last 10 years, or using an evergreen browser. We don't need to support pre-ES5 environments, we don't pass values across frames, and we uninstall packages which break the environment.[^2]
 
 These layers of niche compatibility somehow made their way into the "hot path" of everyday packages. The tiny group of people who actually need this stuff should be the ones seeking out special packages for it. Instead, it is reversed and **we all pay the cost**.
 
@@ -142,7 +142,7 @@ Similar to the first pillar, this philosophy made its way into the "hot path" an
 
 # 3. "Ponyfills" that overstayed their welcome
 
-![eslint-plugin-react polyfills](/assets/images/eslint-plugin-react-polyfills.svg){: .img-small}
+![eslint-plugin-react polyfills](/assets/images/eslint-plugin-react-polyfills.svg){: .img-small}[^1]
 
 If you're building an app, you might want to use some "future" features your chosen engine doesn't support yet. In this situation, a **polyfill** can come in handy - it provides a fallback implementation where the feature should be, so you can use it as if it were natively supported.
 
@@ -174,7 +174,7 @@ For example:
 
 Unless these packages are being kept alive because of _Pillar 1_, they're usually still used just because nobody ever thought to remove them.
 
-When all long-term support versions of engines have the feature, the ponyfill should be removed.
+When all long-term support versions of engines have the feature, the ponyfill should be removed.[^3]
 
 # What can we do about it?
 
@@ -186,7 +186,7 @@ We all pay the cost for an incredibly small group of people to have an unusual a
 
 This isn't necessarily a fault of the people who made these packages, as each person should be able to build however they want. Many of them are an older generation of influential JavaScript developers - building packages in a darker time where many of the nice APIs and cross-compatibility we have today didn't exist. They built the way they did because it was possibly the best way at the time.
 
-The problem is that we never moved on from that. We still download all of this fluff today even though we've had these features for several years.
+The problem is that we never moved on from that. We still download all of this bloat today even though we've had these features for several years.
 
 I think we can solve this by reversing things. This small group should pay the cost - they should have their own special stack pretty much only they use. Everyone else gets the modern, lightweight, and widely supported code.
 
@@ -194,8 +194,9 @@ Hopefully things like [e18e](https://e18e.dev) and [npmx](https://npmx.dev) can 
 
 We can fix it.
 
-## Disclaimers / Notes
+## Footnotes
 
-- Most mentioned years of support are from MDN, or if it pre-dates MDN, from the compat data
-- Most of this bloat is from a time when it was probably necessary since the platform obviously wasn't as feature-rich back then. I think it was probably the right decision/architecture at the time.
-- "Ponyfill" stuff in general is an unsettled topic, really. I think we should drop them once LTS is achieved, but others do disagree and want them "forever".
+[^1]: Most mentioned years of support are from MDN, or if it pre-dates MDN, from the compat data
+[^2]: Most of this bloat is from a time when it was probably necessary since the platform obviously wasn't as feature-rich back then. I think it was probably the right decision/architecture at the time.
+[^3]: "Ponyfill" stuff in general is an unsettled topic, really. I think we should drop them once LTS is achieved, but others do disagree and want them "forever".
+[^4]: I believe there are people who need such old engines, but would love to see some examples
