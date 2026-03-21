@@ -186,7 +186,7 @@ Start asking yourself, "why do I have this package?" and "do I really need it?".
 
 If you find something which seems redundant, raise an issue with the maintainer asking if it can be removed.
 
-If you encounter a direct dependency which has many of these issues, have a look for an alternative which doesn't. For example, most modern projects have moved away from `execa` to `tinyexec` which achieves the same thing without the bloat at a fraction of the size.
+If you encounter a direct dependency which has many of these issues, have a look for an alternative which doesn't. A good start for that is the [module-replacements](https://e18e.dev/docs/replacements/) project.
 
 ## Using knip to remove unused dependencies
 
@@ -244,6 +244,16 @@ For example, let's take a look at the bottom half of [ESLint's dependency graph]
 ![eslint dependency graph](/assets/images/eslint-graph.png){: .img-small}
 
 We can see in this graph that the `find-up` branch is isolated, in that nothing else uses its deep dependencies. For something as simple as an upwards file-system traversal, maybe we don't need 6 packages. We can then go look for an alternative, such as [`empathic`](https://npmx.dev/package/empathic) which has a much smaller [dependency graph](https://npmgraph.js.org/?q=empathic@2.0.0) and achieves the same thing.
+
+## Module replacements
+
+The [module replacements](https://github.com/es-tooling/module-replacements) project is being used as a central data set for the wider community to document which packages can be replaced with native functionality, or more performant alternatives.
+
+If you're ever in need of an alternative or just want to check your dependencies, this data set is great for that.
+
+Similarly, if you come across packages in your tree which are made redundant by native functionality, or just have better battle-tested alternatives, this project is definitely a great place to contribute that so others can benefit from it.
+
+Paired with the data, there's also a [codemods project](https://github.com/es-tooling/module-replacements-codemods) which provides codemods to automatically migrate some of these packages to their suggested replacements.
 
 # Closing Thoughts
 
