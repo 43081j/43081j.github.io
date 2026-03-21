@@ -193,6 +193,18 @@ code.highlighter-rouge {
   padding: 1px 4px;
 }
 
+.post img {
+  max-width: 100%;
+}
+
+.post img.img-small {
+  max-width: 75%;
+}
+
+.post img.img-smaller {
+  max-width: 50%;
+}
+
 .post h1 {
   border-bottom:none;
   margin-bottom: 5px;
