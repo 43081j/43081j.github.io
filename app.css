@@ -205,6 +205,40 @@ code.highlighter-rouge {
   max-width: 50%;
 }
 
+.post img.img-framed {
+  display: block;
+  margin: 0 auto;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 3px;
+}
+
+.post .img-columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+@media (min-width: 768px) {
+  .post .img-columns {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.post .img-columns figure {
+  margin: 0;
+}
+
+.post figure {
+  margin: 0 0 15px;
+}
+
+.post figcaption {
+  font-size: 0.9em;
+  text-align: center;
+  opacity: 0.7;
+}
+
 .post h1 {
   border-bottom:none;
   margin-bottom: 5px;
