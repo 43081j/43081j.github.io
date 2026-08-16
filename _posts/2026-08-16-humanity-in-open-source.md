@@ -77,9 +77,11 @@ We have two kinds of agentic contribution: "agent-assisted human contributions",
 - An agent-assisted human contribution is when a human uses an agent to help them make a contribution
 - An end-to-end agentic contribution is when an agent makes a contribution and sees it through on its own, without any human involvement (regardless of if a human triggered it)
 
+The agent-assisted contributions are a natural evolution of how we work as software engineers. Just another tool in our toolbox to help us get things done. These contributions are usually high quality, and the human behind them is still very much involved.
+
 A huge change in the open source world is that we are now seeing a lot more end-to-end agentic contributions. Where we used to interact with a real human, we're just chatting to someone else's agent now.
 
-I really miss seeing text that a human wrote. Every PR looks the same, every issue looks the same. All of them are a wall of text with nice headings, bullet point lists, and code blocks. I don't even need to read the words anymore to know its an agentic contribution. The shape of it is enough.
+I really miss seeing text that a human wrote. Every PR looks the same, every issue looks the same. All of them are a wall of text with nice headings, bullet point lists, and code blocks. I don't even need to read the words anymore to know it is an agentic contribution. The shape of it is enough.
 
 <figure>
   <img class="img-framed" src="/assets/images/agentic-pr.jpg" alt="An agentic contribution">
@@ -90,7 +92,7 @@ I really miss seeing text that a human wrote. Every PR looks the same, every iss
 
 It takes a lot of time to parse these walls of text mentally, and gives no joy doing it. We also have no idea who we're talking to, or if they're even aware of this interaction.
 
-Even if the change is correct, what's the point in responding? I suppose I get to spend someone else's tokens instead of my own, but other than that, I could just copy the issue into my own agent and fix it myself without the overhead of dealing with someone else's agent.
+Even if the change is correct, what's the point in responding? I could just copy the issue into my own agent and fix it myself without the overhead of dealing with someone else's agent.
 
 ## The loss of community
 
@@ -114,17 +116,21 @@ There's no fun when you take humans out of the loop. Combine that with the highe
 
 Many high profile maintainers I am friends with have experienced burnout at some point in the last couple of years. Some have left open source entirely, and some have left the tech industry entirely. This is a huge loss for the open source world.
 
-## It's not all bad!
-
-This is a pretty dire post so far, but only because I've focused on the bad things. There's a lot of good happening in open source, and I'm loving it like I always have. Everything is excellent, it'll just be more excellent if we can solve some of the problems I mentioned above.
-
 ## What can we do about it?
+
+This is a pretty dire post so far, but not all is bad. A lot of great things are happening in open source, and there is plenty we can do to make it better for all of us.
 
 ### Maintainers: Use tooling to filter out agentic spam
 
 There are a few tools out there, but I particularly like [AgentScan](https://github.com/MatteoGabriele/agentscan) right now. As a maintainer, this gives you an easy way to detect end-to-end agentic contributions that are most likely spam or low quality. You can then triage these contributions accordingly, and focus your time on the human contributions that are more likely to be high quality.
 
 Similarly, GitHub now offers a way to limit the maximum number of open pull requests per user. In high volume projects, this can be a good way to prevent mass agentic contributions from things like agentic bounty programs.
+
+### Maintainers: Define an AI policy in `CONTRIBUTING.md`
+
+Even if an agent isn't going to read this, it is a good idea to specify in your contribution guidelines what your policy is regarding AI contributions.
+
+Each project is different, you may want to ban AI contributions entirely, or you may want to allow them with some restrictions. Either way, it is a good idea to make this clear in your contribution guidelines.
 
 ### Communities are still forming, join them!
 
