@@ -70,6 +70,19 @@ Here's my GitHub activity in 2024, compared to 2026:
 
 Code review has doubled, while my own pull requests have nearly halved. Keep in mind the overall total has gone up too as I am doing more open source this year. The trend is clear, though: more review, less code.
 
+Let's take a look at some rough numbers for a few projects:
+
+| Project | 2025 Issues | 2026 (H1) Issues | Issues (projected) | 2025 PRs | 2026 (H1) PRs | PRs (projected) |
+| -- | -- | -- | -- | -- | -- | -- |
+| chai | 18 | 1 | -89% | 78 | 79 | +103% |
+| VueUse | 234 | 79 | -32% | 507 | 268 | +6% |
+| clack | 53 | 53 | +100% | 160 | 106 | +33% |
+| Nuxt | 1378 | 477 | -31% | 1634 | 1458 | +79% |
+| SvelteKit | 818 | 431 | +5% | 882 | 1203 | +173% |
+| Astro | 799 | 710 | +78% | 1314 | 1871 | +185% |
+
+**Note that we're only half way through 2026**. For many, this is likely to at least double by the year end. Also keep in mind that these are the raw numbers rather than only end-to-end agentic contributions. Many of these pull requests are maintainers pushing higher volumes because they can (or because they feel the pressure to).
+
 ## The lack of humanity
 
 We have two kinds of agentic contribution: "agent-assisted human contributions", and "end-to-end agentic contributions". What do I mean by this?
@@ -105,6 +118,18 @@ People used to contribute to projects repeatedly, and eventually become _contrib
 In the past, a person could start a project, gain some contributors, and eventually some maintainers. In parallel, users would grow and start discussing enough that we now need a Discord server. Now we have a community! One of the best parts of open source is the community that forms around it.
 
 Sadly, many projects now start with one person and stay that way. No human contributors to turn into maintainers, no users to turn into a community. Just a pile of agents spending each other's tokens.
+
+## Pressure to create
+
+Many projects have competition; other projects that do roughly the same thing with their own benefits and drawbacks. This is a good thing, as it drives progress and innovation.
+
+Today, however, the competition is moving faster than ever with the help of agents. What should we do when we see this? Often the answer is to try to keep up, also with the help of agents.
+
+This is a vicious cycle that leads to all sorts of problems rather than any good innovation. Projects which used to be the best at what they do are now bloated, unfocused, and average at many things instead.
+
+It is worth remembering that a lot of the volume we're seeing isn't coming from outside the project at all. Some of it is us, the maintainers, shipping faster than we otherwise would because the tools let us and the competition appears to demand it.
+
+For example, a tool I use regularly was once the best and fastest at one thing. Over the last year, it has gained more and more features well outside its original scope. Now it can do a bit of everything, at the cost of losing its original focus. Most of those changes have been shipped by the primary maintainer, who has been under pressure to keep up with the competition (which never had that same original scope).
 
 ## Burnout is increasing
 
