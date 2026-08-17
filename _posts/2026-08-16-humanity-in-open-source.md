@@ -92,7 +92,9 @@ To this day, I am still friends with many of the original Polymer team, and lear
 
 Going even more human, we can use [npmx](https://npmx.dev/) as a great example. In the last year, npmx has held several in-person meet ups which have directly resulted in connecting people who had never met before, and who now work together on open source projects. Again, these are real friendships.
 
-That's all social, though. Human contributions also matter a lot for the project itself. For example, [Fabio](https://github.com/fabiospampinato/) decided to investigate the performance of [Prettier](https://github.com/prettier/prettier/), and found that it was slower than it could be. Nobody asked him to look, and nobody filed the issue he was answering. Instead of creating an alternative, he worked with the Prettier team to build a new, much faster CLI, and stayed with it long enough to see a rewrite land in someone else's project. That's a very different thing to fixing individual issues as they come in.
+That's all social, though. Human contributions also matter a lot for the project itself. For example, [Mateusz](https://bsky.app/profile/andarist.bsky.social) ran [changesets](https://github.com/changesets/changesets/) solo for years. Between 2021 and 2024, he was pretty much the only person committing to the project. A v3 had been on the cards since around 2021, but never moved much. From late 2024 onwards, [Bjorn](https://bsky.app/profile/bluwy.me) and [Adam](https://bsky.app/profile/haglund.dev) started contributing, stuck around, and [Changesets v3](https://changesets.dev/blog/announcing-changesets-v3) finally shipped. The three of them are now the primary maintainers, together.
+
+Some work only happens when someone else turns up and stays. No volume of agentic patches gets you there.
 
 ## The lack of humanity
 
@@ -141,6 +143,8 @@ This is a vicious cycle that leads to all sorts of problems rather than any good
 It is worth remembering that a lot of the volume we're seeing isn't coming from outside the project at all. Some of it is us, the maintainers, shipping faster than we otherwise would because the tools let us and the competition appears to demand it.
 
 For example, a tool I use regularly was once the best and fastest at one thing. Over the last year, it has gained more and more features well outside its original scope. Now it can do a bit of everything, at the cost of losing its original focus. Most of those changes have been shipped by the primary maintainer, who has been under pressure to keep up with the competition (which never had that same original scope).
+
+You're allowed to not keep up. Rarely did a project die from shipping less than a competitor, and plenty have been ruined by trying to match one. **Being the best at one thing is a valid strategy, and it's usually why people picked you in the first place.**
 
 ## Burnout is increasing
 
