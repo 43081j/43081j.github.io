@@ -14,7 +14,7 @@ First of all, some context for those who may not know me. I spend a large part o
 
 For example, I am part of several open source teams: [e18e](https://e18e.dev/), [prettier](https://github.com/prettier), [chai](https://github.com/chaijs), [npmx](https://github.com/npmx-dev), [bombshell](https://github.com/bombshell-dev), [parse5](https://github.com/inikulin/parse5), [tinylibs](https://github.com/tinylibs), [chokidar](https://github.com/paulmillr/chokidar), and [VueUse](https://github.com/vueuse).
 
-This isn't an exhaustive list, and I _actively_ work on all of these projects. A typical week for me involves reviewing pull requests, triaging issues, managing communities, managing direction, and writing code. Keep in mind, this is only my maintainer work; I also contribute to other projects.
+I work on all of these projects. A typical week for me involves reviewing pull requests, triaging issues, managing communities, managing direction, and writing code. Keep in mind, this is only my maintainer work; I also contribute to other projects.
 
 You can see that **this is a lot of work**, even before the AI era. So you might also guess where this post is going...
 
