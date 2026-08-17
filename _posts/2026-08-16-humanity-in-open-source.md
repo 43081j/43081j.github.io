@@ -158,6 +158,14 @@ Even if an agent isn't going to read this, it is a good idea to specify in your 
 
 Each project is different, you may want to ban AI contributions entirely, or you may want to allow them with some restrictions. Either way, it is a good idea to make this clear in your contribution guidelines.
 
+There are already some good examples out there to borrow from:
+
+- [Nuxt](https://github.com/nuxt/nuxt/blob/main/CONTRIBUTING.md#ai-assisted-contributions) asks contributors to never let an LLM speak for them, and never let an LLM think for them. Use the tools, but understand and write your own words.
+- [Vitest](https://github.com/vitest-dev/vitest/blob/main/CONTRIBUTING.md#ai-contributions) welcomes AI as an assistant but requires a real person behind every issue and pull request, with disclosure of the tool used. Anything that looks entirely automated gets labelled and closed after three days unless a human genuinely responds.
+- [clack](https://github.com/bombshell-dev/clack/blob/main/.github/PULL_REQUEST_TEMPLATE.md#ai-generated-code-disclosure) takes a lighter approach with a disclosure checkbox in the pull request template. AI use is fine, reviewers just want to know so they can pay extra attention to edge cases.
+
+These sit at quite different points on the spectrum, which is the point. Pick whichever fits your project, but pick something and write it down.
+
 ### Companies: Keep a human in the loop for upstream contributions
 
 If your company makes heavy use of agentic workflows, here's the pitch: an increasing number of us reject end-to-end agentic contributions outright, on sight. If you want your upstream changes to actually land, you're much more likely to succeed if you keep a human in the loop.
