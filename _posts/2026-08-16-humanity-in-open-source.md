@@ -84,6 +84,16 @@ Let's take a look at some rough numbers for a few projects:
 
 The pattern to look at here is the two halves of the table against each other. Issues are flat or falling in most of these projects, while pull requests are up in every single one, some of them close to triple. Fewer people are stopping to describe a problem, and far more code is arriving to fix it. That is exactly what you would expect when an agent's first move is to open a pull request rather than a conversation, and it lands on a maintainer's plate either way.
 
+## Why human contributions matter
+
+Looking at my own history, my first real involvement in open source was through the [polymer](https://github.com/Polymer/polymer) project. I contributed to this project enough that I became good friends with the maintainers, and eventually became a partial code owner myself. I also ended up maintaining various tools and related projects in the Polymer ecosystem, which later became the [lit](https://lit.dev/) ecosystem.
+
+To this day, I am still friends with many of the original Polymer team, and learnt a large amount of what I know about open source from them. These are real, long term friendships, even though many of us no longer work on the same projects.
+
+Going even more human, we can use [npmx](https://npmx.dev/) as a great example. In the last year, npmx has held several in-person meet ups which have directly resulted in connecting people who had never met before, and who now work together on open source projects. Again, these are real friendships.
+
+That's all social, though. Human contributions also matter a lot for the project itself. For example, [Fabio](https://github.com/fabiospampinato/) decided to investigate the performance of [Prettier](https://github.com/prettier/prettier/), and found that it was slower than it could be. Nobody asked him to look, and nobody filed the issue he was answering. Instead of creating an alternative, he worked with the Prettier team to build a new, much faster CLI, and stayed with it long enough to see a rewrite land in someone else's project. That's a very different thing to fixing individual issues as they come in.
+
 ## The lack of humanity
 
 We have two kinds of agentic contribution: "agent-assisted human contributions", and "end-to-end agentic contributions". What do I mean by this?
