@@ -53,7 +53,7 @@ They tend to arrive from one of a few places:
 - A user gives an agent the task of finding open source projects to contribute to, and it submits issues and pull requests on their behalf
 - A bounty program aimed at agents, where the agent picks issues to work on and submits pull requests for them
 
-**This change means many of us maintainers are now receiving extremely high volumes of issues and pull requests compared to before.**
+**This change means many of us maintainers are now receiving extremely high volumes of pull requests compared to before.**
 
 Here's my GitHub activity in 2025, compared to 2026:
 
@@ -80,7 +80,9 @@ Let's take a look at some rough numbers for a few projects:
 | SvelteKit | 818 | 431 | +5% | 882 | 1203 | +173% |
 | Astro | 799 | 710 | +78% | 1314 | 1871 | +185% |
 
-**Note that these are first-half numbers, and we're still part way through 2026 at the time of writing**. The projected columns simply double the first half, which is if anything conservative. Also keep in mind that these are the raw numbers rather than only end-to-end agentic contributions. Many of these pull requests are maintainers pushing higher volumes because they can (or because they feel the pressure to).
+**Note that these are first-half numbers, and we're still part way through 2026 at the time of writing**. The projected columns simply double the first half, which is if anything conservative. These are also raw numbers as there's no reliable way to know which of them are end-to-end agentic contributions.
+
+The pattern to look at here is the two halves of the table against each other. Issues are flat or falling in most of these projects, while pull requests are up in every single one, some of them close to triple. Fewer people are stopping to describe a problem, and far more code is arriving to fix it. That is exactly what you would expect when an agent's first move is to open a pull request rather than a conversation, and it lands on a maintainer's plate either way.
 
 ## The lack of humanity
 
@@ -104,7 +106,7 @@ I really miss seeing text that a human wrote. Every PR looks the same, every iss
 
 It takes a lot of time to parse these walls of text mentally, and gives no joy doing it. We also have no idea who we're talking to, or if they're even aware of this interaction.
 
-Even if the change is correct, what's the point in responding? I could just copy the issue into my own agent and fix it myself without the overhead of dealing with someone else's agent.
+Even if the change is correct, what's the point in responding? At that point I may as well copy the issue into my own agent and fix it myself, without the overhead of dealing with someone else's agent. That's the part that should worry us: the most rational move is to cut the other person out entirely, and I don't think anyone actually wants an ecosystem where that's true.
 
 ## The loss of community
 
