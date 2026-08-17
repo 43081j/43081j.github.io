@@ -47,7 +47,7 @@ Regardless of AI, a typical open source project receives contributions in the fo
 
 In the past, these contributions were made by humans. **Today, these are often made by agents.**
 
-They tend to arrive from one of a few places:
+Of these, the lower quality ones tend to arrive from one of a few places:
 
 - An agent gets blocked by a missing feature or a bug in a dependency, and opens an issue or pull request against it automatically
 - A user gives an agent the task of finding open source projects to contribute to, and it submits issues and pull requests on their behalf
