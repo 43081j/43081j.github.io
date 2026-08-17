@@ -96,10 +96,10 @@ That's all social, though. Human contributions also matter a lot for the project
 
 ## The lack of humanity
 
-We have two kinds of agentic contribution: "agent-assisted human contributions", and "end-to-end agentic contributions". What do I mean by this?
+We have two kinds of agentic contribution:
 
-- An agent-assisted human contribution is when a human uses an agent to help them make a contribution
-- An end-to-end agentic contribution is when an agent makes a contribution and sees it through on its own, without any human involvement (regardless of if a human triggered it)
+- An agent-assisted human contribution - when a human uses an agent to help them make a contribution
+- An end-to-end agentic contribution - when an agent makes a contribution and sees it through on its own, without any human involvement (regardless of if a human triggered it)
 
 The agent-assisted contributions are a natural evolution of how we work as software engineers. Just another tool in our toolbox to help us get things done. These contributions are usually high quality, and the human behind them is still very much involved.
 
