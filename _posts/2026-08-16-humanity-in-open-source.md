@@ -55,12 +55,12 @@ They tend to arrive from one of a few places:
 
 **This change means many of us maintainers are now receiving extremely high volumes of issues and pull requests compared to before.**
 
-Here's my GitHub activity in 2024, compared to 2026:
+Here's my GitHub activity in 2025, compared to 2026:
 
 <div class="img-columns">
   <figure>
-    <img src="/assets/images/github-2024.jpg" alt="GitHub activity graph - 2024">
-    <figcaption>2024</figcaption>
+    <img src="/assets/images/github-2025.jpg" alt="GitHub activity graph - 2025">
+    <figcaption>2025</figcaption>
   </figure>
   <figure>
     <img src="/assets/images/github-2026.jpg" alt="GitHub activity graph - 2026">
@@ -68,20 +68,19 @@ Here's my GitHub activity in 2024, compared to 2026:
   </figure>
 </div>
 
-Code review has doubled, while my own pull requests have nearly halved. Keep in mind the overall total has gone up too as I am doing more open source this year. The trend is clear, though: more review, less code.
+Code review went from 22% of my activity to 43%, while my own pull requests dropped from 28% to 19%. Some of that shift is simply that I've taken on more projects this year, and more projects means more review. But not all of it.
 
 Let's take a look at some rough numbers for a few projects:
 
-| Project | 2025 Issues | 2026 (H1) Issues | Issues (projected) | 2025 PRs | 2026 (H1) PRs | PRs (projected) |
+| Project | 2025 Issues | 2026 (H1) Issues | Issues (projected change) | 2025 PRs | 2026 (H1) PRs | PRs (projected change) |
 | -- | -- | -- | -- | -- | -- | -- |
-| chai | 18 | 1 | -89% | 78 | 79 | +103% |
 | VueUse | 234 | 79 | -32% | 507 | 268 | +6% |
 | clack | 53 | 53 | +100% | 160 | 106 | +33% |
 | Nuxt | 1378 | 477 | -31% | 1634 | 1458 | +79% |
 | SvelteKit | 818 | 431 | +5% | 882 | 1203 | +173% |
 | Astro | 799 | 710 | +78% | 1314 | 1871 | +185% |
 
-**Note that we're only half way through 2026**. For many, this is likely to at least double by the year end. Also keep in mind that these are the raw numbers rather than only end-to-end agentic contributions. Many of these pull requests are maintainers pushing higher volumes because they can (or because they feel the pressure to).
+**Note that these are first-half numbers, and we're still part way through 2026 at the time of writing**. The projected columns simply double the first half, which is if anything conservative. Also keep in mind that these are the raw numbers rather than only end-to-end agentic contributions. Many of these pull requests are maintainers pushing higher volumes because they can (or because they feel the pressure to).
 
 ## The lack of humanity
 
@@ -157,17 +156,15 @@ Even if an agent isn't going to read this, it is a good idea to specify in your 
 
 Each project is different, you may want to ban AI contributions entirely, or you may want to allow them with some restrictions. Either way, it is a good idea to make this clear in your contribution guidelines.
 
-### Communities are still forming, join them!
+### Companies: Keep a human in the loop for upstream contributions
 
-My two prime examples of this are [e18e](https://e18e.dev/) and [npmx](https://npmx.dev/). Both of these projects have incredible communities behind them, built up from humans who care, and who are invested in the project. These communities are growing, and are a joy to be a part of.
+If your company makes heavy use of agentic workflows, here's the pitch: an increasing number of us reject end-to-end agentic contributions outright, on sight. If you want your upstream changes to actually land, you're much more likely to succeed if you keep a human in the loop.
 
-In the case of e18e, we somehow managed to find hundreds of people who truly care about making the JavaScript ecosystem faster and more secure. Everyone wants this really, but it is pretty niche to want to _help make it happen_. The fact that we have hundreds of people actively contributing to this effort on a regular basis is incredible, and a testament to the fact that communities are still forming in open source.
+One way of achieving this is a rule in your `CLAUDE.md`, `AGENTS.md`, or whatever your agents read. Have them stop before opening anything upstream, and have the human write the pull request or issue text themselves, and any replies that follow. Your agent can still do the investigation and the code.
 
-Similarly, npmx saw incredible growth in the first few weeks alone. In just N weeks, there were N0 pull requests submitted by humans, and N1 contributors. One of the fastest growing communities the web has seen in a long time.
+I know this is slower and less convenient than letting it run end to end, but it means your change is far more likely to be merged.
 
-We may have fewer communities today, but they do exist and are still forming. I'd highly recommend joining one you're interested in.
-
-### Follow contribution guidelines
+### Contributors: Follow contribution guidelines
 
 Most open source projects have contribution guidelines. These are usually in a `CONTRIBUTING.md` file, and outline how to contribute to the project.
 
@@ -175,13 +172,34 @@ If you're thinking of contributing, whether through issues or pull requests, ple
 
 This added structure helps maintainers gain an understanding of your contribution much faster than they would otherwise. The benefit is yours as much as the maintainer's, as it will help you get your contribution merged faster.
 
-### Be a human contributor
-
-If you're thinking of creating an issue or pull request, write the text yourself.
+### Contributors: Write the text yourself
 
 Most of us don't mind if you use an agent to help investigate an issue, or to help write the code. The important part is that you write the text of the issue or pull request yourself, and you respond when we post a comment.
 
 Not only will this give us a better experience, but it'll also lead to you having a better understanding of the change. Writing things down yourself is a good way to learn, and will help you become a better contributor.
+
+### Contributors: Communities are still forming, join them!
+
+My two prime examples of this are [e18e](https://e18e.dev/) and [npmx](https://npmx.dev/). Both of these projects have incredible communities behind them, built up from humans who care, and who are invested in the project. These communities are growing, and are a joy to be a part of.
+
+In the case of e18e, we somehow managed to find hundreds of people who truly care about making the JavaScript ecosystem faster and more secure. Everyone wants this really, but it is pretty niche to want to _help make it happen_. The fact that we have hundreds of people actively contributing to this effort on a regular basis is incredible, and a testament to the fact that communities are still forming in open source.
+
+npmx is an even starker example, given how young it is. Here's what its first 40 days looked like:
+
+| Metric | Value |
+| -- | -- |
+| PRs opened | 1,412 |
+| PRs merged | 1,192 (84%) |
+| Unique PR authors | 224 (205 merged) |
+| Issues opened | 497 |
+| Issues closed | 401 |
+| Comments on PRs | 5,283 |
+| Commits | 1,437 |
+| Distinct commit authors | 212 |
+
+That's forty days. Compare it to the annual numbers earlier in this post and it holds its own against projects many years older. **The difference is that almost all of it was written by humans.** 224 people opened those pull requests, 212 of them landed commits, and they left over five thousand comments on each other's work. An 84% merge rate on top of that, because people were building something together rather than firing contributions into the void.
+
+We may have fewer communities today, but they do exist and are still forming. I'd highly recommend joining one you're interested in.
 
 ## Wrapping up
 
